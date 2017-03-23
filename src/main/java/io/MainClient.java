@@ -1,3 +1,4 @@
+
 package io;
 
 import java.io.BufferedWriter;
@@ -74,6 +75,14 @@ public class MainClient {
 	}
 	
 	public static void main(String[] args){
+//		PropertyConfigurator.configure("log4j.properties");
+//		try{
+//		MainClient.runClient();
+//		System.exit(0);
+//		}catch(ClientException e){
+//			LOG.error("Error in client management");
+//			
+//		}
 		Window window = new Window();
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
