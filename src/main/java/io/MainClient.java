@@ -7,12 +7,14 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
-
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 public class MainClient {
 	private static final Logger LOG = Logger.getLogger(MainClient.class.getName());
@@ -28,10 +30,6 @@ public class MainClient {
 		OutputStream out = null;
 		OutputStreamWriter osw = null;
 		BufferedWriter bw =null;
-		
-		
-		//PrintWriter pw = null;
-		
 		LOG.info("init Client");
 		
 		sc = new Scanner(System.in);
@@ -102,23 +100,33 @@ public class MainClient {
 //			LOG.error("Error in client management");
 //			
 //		}
+		try {
+			ConsoleHandler console = new ConsoleHandler();
+			FileHandler fh = new FileHandler("./windowLogger.log", true);
+			SimpleFormatter sf = new SimpleFormatter();
 		
-		//Appel première fenêtre connexion
-		ConnexionWindow window = new ConnexionWindow();
-		window.setVisible(true);
-		window.setLocationRelativeTo(null);
+			LOG.addHandler(console); 
+			LOG.addHandler(fh);
+			fh.setFormatter(sf);
+            LOG.setLevel(Level.ALL);
+            
+            LOG.log(Level.CONFIG, "Configuration done.");
+            LOG.removeHandler(console);
+            
+            //Appel premiÃ¨re fenÃªtre de connexion
+            ConnexionWindow window = new ConnexionWindow();
+    		window.setVisible(true);
+    		window.setLocationRelativeTo(null);
+		
+		} catch (SecurityException e) {
+			LOG.log(Level.SEVERE, "Security error in FileHandler.", e); 
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, "An error occured in FileHandler.", e);
+		}
+	}
 		
 //		  Window window = new Window();
 //		  window.setVisible(true);
 //		  window.setLocationRelativeTo(null);
-		
-		try{
-		MainClient.runClient();
-		System.exit(0);
-		}catch(ClientException e){
-			LOG.error("Error in client management");
-			
-		}
-	}
 
 }
