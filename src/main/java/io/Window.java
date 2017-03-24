@@ -9,8 +9,19 @@ package io;
 
 
 import java.net.*;
+
 import java.io.*;
 import java.util.*;
+
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ItemEvent;
+
+import javax.swing.GroupLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.LayoutStyle;
 
 /**
  * 
@@ -24,16 +35,17 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextArea chatTextArea;
     private javax.swing.JButton connectButton;
     private javax.swing.JButton disconnectButton;
-    private javax.swing.JTextArea inputTextArea;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+
+    private javax.swing.JTextPane inputTextArea;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JLabel onlineLabel;
+    private javax.swing.JScrollPane inputMessage;
+    private javax.swing.JScrollPane messageList;
+    private javax.swing.JScrollPane usersListPanel;
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextArea usersList;
+    private javax.swing.JComboBox emo;
     // End of variables declaration              
 	
 	
@@ -158,43 +170,64 @@ public class Window extends javax.swing.JFrame {
     /*	 Initialisation du visuel  	*/
     
     private void initComponents() {
-    	final Controller controller = new Controller();
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        inputTextArea = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
+    	
+    	 final Object[] items =
+    	        {
+    			 	new ImageIcon("images/emo_icon.png"),
+    	            new ImageIcon("images/lol_icon.png"),
+    	            new ImageIcon("images/hungry_icon.png"),
+    	            new ImageIcon("images/loudly_icon.png"),
+    	            new ImageIcon("images/monkey_icon.png"),
+    	            new ImageIcon("images/poop_icon.png")
+    	        };
+    	 
+
+
+        inputMessage = new javax.swing.JScrollPane();
+        inputTextArea = new javax.swing.JTextPane();
+        messageList = new javax.swing.JScrollPane();
         chatTextArea = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         connectButton = new javax.swing.JButton();
         disconnectButton = new javax.swing.JButton();
         sendButton = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        usersListPanel = new javax.swing.JScrollPane();
         usersList = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        onlineLabel = new javax.swing.JLabel();
+        
+        String[] tab = {"", " :) ", " :( ", " :/ ", " :s "};
+        emo = new JComboBox(items);
+        emo.setPreferredSize(new Dimension(100, 20));
+ 
 
+        Icon icon = new ImageIcon("images/lol_icon.png");
+        
+
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat IRC Cnam");
 
-        inputTextArea.setColumns(20);
-        inputTextArea.setLineWrap(true);
-        inputTextArea.setRows(5);
-        jScrollPane1.setViewportView(inputTextArea);
+        Font fontText = new Font("Arial", Font.PLAIN, 14);
+        
+        inputTextArea.setFont(fontText);
+        inputMessage.setViewportView(inputTextArea);
 
         chatTextArea.setColumns(20);
         chatTextArea.setEditable(false);
-        chatTextArea.setFont(new java.awt.Font("Times New Roman", 0, 12));
+        chatTextArea.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         chatTextArea.setLineWrap(true);
         chatTextArea.setRows(5);
-        jScrollPane2.setViewportView(chatTextArea);
+        messageList.setViewportView(chatTextArea);
 
-        jLabel1.setText("Username:");
+        usernameLabel.setText("Username:");
 
         connectButton.setText("Connexion");
         connectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 controller.connectButtonActionPerformed(evt);
+
             }
         });
 
@@ -202,6 +235,7 @@ public class Window extends javax.swing.JFrame {
         disconnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 controller.disconnectButtonActionPerformed(evt);
+
             }
         });
 
@@ -209,71 +243,167 @@ public class Window extends javax.swing.JFrame {
         sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 controller.sendButtonActionPerformed(evt);
+
             }
         });
 
         usersList.setEditable(false);
         usersList.setColumns(20);
         usersList.setRows(5);
-        jScrollPane3.setViewportView(usersList);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Online Users");
+        usersListPanel.setViewportView(usersList);
 
-        setJMenuBar(jMenuBar1);
+        onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        onlineLabel.setText("Online Users");
+
+        
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
+        
+
+        
+        emo.addItemListener(new java.awt.event.ItemListener(){
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {
+//                	inputTextArea.append((String)emo.getSelectedItem());
+                	if (emo.getSelectedItem() == items[0]){
+                		
+                	}
+                	else if (emo.getSelectedItem() == items[1]) {
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/lol_icon_chat.png"));
+					} else if(emo.getSelectedItem() == items[2]){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/hungry_icon_chat.png"));	
+					} else if(emo.getSelectedItem() == items[3]){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));	
+					} else if(emo.getSelectedItem() == items[4]){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/monkey_icon_chat.png"));	
+					} else if(emo.getSelectedItem() == items[5]){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));	
+					}
+                	else{
+	                	inputTextArea.insertIcon((Icon) emo.getSelectedItem());
+					}
+                }
+            }
+        });
         
         /*	 Instanciation de la fenetre et ajout des composants 	*/
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);       
+        
+        layout.setHorizontalGroup( 
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputMessage, GroupLayout.DEFAULT_SIZE,396, Short.MAX_VALUE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emo, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sendButton, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(messageList, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 500 ,Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(connectButton)
                         .addGap(18, 18, 18)
                         .addComponent(disconnectButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(onlineLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usersListPanel))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(disconnectButton)
                     .addComponent(connectButton)
-                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameLabel, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(onlineLabel))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(sendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane3))
+                        .addComponent(messageList, GroupLayout.DEFAULT_SIZE,261, Short.MAX_VALUE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(sendButton, GroupLayout.DEFAULT_SIZE,10, Short.MAX_VALUE)
+                            .addComponent(inputMessage, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                            .addComponent(emo, GroupLayout.Alignment.CENTER, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(usersListPanel))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>                        
 
+
+    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+            if (isConnected == false) {
+//            username = usernameField.getText();
+            usernameField.setEditable(false);
+
+
+
+            try {
+//                sock = new Socket(serverIP, Port);
+                InputStreamReader streamreader = new InputStreamReader(sock.getInputStream());
+                reader = new BufferedReader(streamreader);
+                writer = new PrintWriter(sock.getOutputStream());
+//                writer.println(username + ":est connecté.:Connecté"); // Displays to everyone that user connected.
+                writer.flush(); // flushes the buffer
+                isConnected = true; // Used to see if the client is connected.
+            } catch (Exception ex) {
+                chatTextArea.append("Impossible de se connecter, réessayez !\n");
+                usernameField.setEditable(true);
+            }
+            ListenThread();
+        } else if (isConnected == true) {
+            chatTextArea.append("Vous êtes déjà connecté. \n");
+        }
+    }                                             
+
+    private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+//        sendDisconnect();
+        Disconnect();
+    }                                       
+    
+    
+    
+
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        String nothing = "";
+        if ((inputTextArea.getText()).equals(nothing)) {
+            inputTextArea.setText("");
+            inputTextArea.requestFocus();
+        } else {
+            try {
+//               writer.println(username + ":" + inputTextArea.getText() + ":" + "Chat");
+               writer.flush(); // flushes the buffer
+            } catch (Exception ex) {
+                chatTextArea.append("Message non envoyé \n");
+            }
+            
+            inputTextArea.setText("");
+            inputTextArea.requestFocus();
+        }
+
+        inputTextArea.setText("");
+        inputTextArea.requestFocus();
+    }                                                                                         
 }
+

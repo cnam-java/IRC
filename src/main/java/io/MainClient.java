@@ -76,6 +76,7 @@ public class MainClient {
 	
 	public static void main(String[] args){
 //		PropertyConfigurator.configure("log4j.properties");
+
 //		try{
 //		MainClient.runClient();
 //		System.exit(0);
@@ -86,7 +87,8 @@ public class MainClient {
 		Window window = new Window();
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
-		
 	}
+		
+	
 
 }
