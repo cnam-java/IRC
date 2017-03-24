@@ -9,6 +9,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
+import javax.swing.UIManager;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -87,6 +89,19 @@ public class MainClient {
 		Window window = new Window();
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
+		try { 
+		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		
+		try{
+		MainClient.runClient();
+		System.exit(0);
+		}catch(ClientException e){
+			LOG.error("Error in client management");
+			
+		}
 	}
 
 }
