@@ -1,3 +1,4 @@
+
 package io;
 
 /*
@@ -10,12 +11,11 @@ package io;
 
 import java.net.*;
 
-import java.io.*;
-import java.util.*;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
+import java.io.*;
+import java.util.*;
 
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
@@ -35,7 +35,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextArea chatTextArea;
     private javax.swing.JButton connectButton;
     private javax.swing.JButton disconnectButton;
-
     private javax.swing.JTextPane inputTextArea;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JLabel onlineLabel;
@@ -171,8 +170,8 @@ public class Window extends javax.swing.JFrame {
     
     private void initComponents() {
 
-    	
-    	 final Object[] items =
+    	final Controller controller = new Controller();
+    	final Object[] items =
     	        {
     			 	new ImageIcon("images/emo_icon.png"),
     	            new ImageIcon("images/lol_icon.png"),
@@ -200,11 +199,10 @@ public class Window extends javax.swing.JFrame {
         String[] tab = {"", " :) ", " :( ", " :/ ", " :s "};
         emo = new JComboBox(items);
         emo.setPreferredSize(new Dimension(100, 20));
- 
+
 
         Icon icon = new ImageIcon("images/lol_icon.png");
         
-
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat IRC Cnam");
@@ -259,7 +257,7 @@ public class Window extends javax.swing.JFrame {
         
         sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendButtonActionPerformed(evt);
+                controller.sendButtonActionPerformed(evt);
             }
         });
         
@@ -346,64 +344,5 @@ public class Window extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
-
-
-    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-            if (isConnected == false) {
-//            username = usernameField.getText();
-            usernameField.setEditable(false);
-
-
-
-            try {
-//                sock = new Socket(serverIP, Port);
-                InputStreamReader streamreader = new InputStreamReader(sock.getInputStream());
-                reader = new BufferedReader(streamreader);
-                writer = new PrintWriter(sock.getOutputStream());
-//                writer.println(username + ":est connecté.:Connecté"); // Displays to everyone that user connected.
-                writer.flush(); // flushes the buffer
-                isConnected = true; // Used to see if the client is connected.
-            } catch (Exception ex) {
-                chatTextArea.append("Impossible de se connecter, réessayez !\n");
-                usernameField.setEditable(true);
-            }
-            ListenThread();
-        } else if (isConnected == true) {
-            chatTextArea.append("Vous êtes déjà connecté. \n");
-        }
-    }                                             
-
-    private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
-//        sendDisconnect();
-        Disconnect();
-    }                                       
-    
-    
-    
-
-    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-        String nothing = "";
-        if ((inputTextArea.getText()).equals(nothing)) {
-            inputTextArea.setText("");
-            inputTextArea.requestFocus();
-        } else {
-            try {
-//               writer.println(username + ":" + inputTextArea.getText() + ":" + "Chat");
-               writer.flush(); // flushes the buffer
-            } catch (Exception ex) {
-                chatTextArea.append("Message non envoyé \n");
-            }
-            
-            inputTextArea.setText("");
-            inputTextArea.requestFocus();
-        }
-
-        inputTextArea.setText("");
-        inputTextArea.requestFocus();
-    }                                                                                         
+    }// </editor-fold>                                                                              
 }
-

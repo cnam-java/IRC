@@ -28,7 +28,7 @@ public class Controller{
 	                writer.flush(); // flushes the buffer
 	                isConnected = true; // Used to see if the client is connected.
 	            } catch (Exception ex) {
-	                chatTextArea.append("Impossible de ce connecter, réessayer !\n");
+	                chatTextArea.append("Impossible de se connecter, réessayer !\n");
 	                usernameField.setEditable(true);
 	            }
 	            ListenThread();
