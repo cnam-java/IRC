@@ -88,7 +88,5 @@ public class MainClient {
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
 	}
-		
-	
 
 }

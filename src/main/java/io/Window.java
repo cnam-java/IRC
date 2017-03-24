@@ -10,7 +10,6 @@ package io;
 
 
 import java.net.*;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
@@ -199,10 +198,8 @@ public class Window extends javax.swing.JFrame {
         String[] tab = {"", " :) ", " :( ", " :/ ", " :s "};
         emo = new JComboBox(items);
         emo.setPreferredSize(new Dimension(100, 20));
-
-
-        Icon icon = new ImageIcon("images/lol_icon.png");
         
+        Icon icon = new ImageIcon("images/lol_icon.png");
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat IRC Cnam");
@@ -225,7 +222,6 @@ public class Window extends javax.swing.JFrame {
         connectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 controller.connectButtonActionPerformed(evt);
-
             }
         });
 
@@ -233,7 +229,6 @@ public class Window extends javax.swing.JFrame {
         disconnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 controller.disconnectButtonActionPerformed(evt);
-
             }
         });
 
@@ -241,14 +236,12 @@ public class Window extends javax.swing.JFrame {
         sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 controller.sendButtonActionPerformed(evt);
-
             }
         });
 
         usersList.setEditable(false);
         usersList.setColumns(20);
         usersList.setRows(5);
-
         usersListPanel.setViewportView(usersList);
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
