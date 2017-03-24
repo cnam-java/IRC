@@ -4,11 +4,34 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Controller{
+	
+	  private javax.swing.JTextArea chatTextArea;
+	    private javax.swing.JButton connectButton;
+	    private javax.swing.JButton disconnectButton;
+	    private javax.swing.JTextPane inputTextArea;
+	    private javax.swing.JLabel usernameLabel;
+	    private javax.swing.JLabel onlineLabel;
+	    private javax.swing.JScrollPane inputMessage;
+	    private javax.swing.JScrollPane messageList;
+	    private javax.swing.JScrollPane usersListPanel;
+	    private javax.swing.JButton sendButton;
+	    private javax.swing.JTextField usernameField;
+	    private javax.swing.JTextArea usersList;
+	    private javax.swing.JComboBox emo;
+	    
+	    String username, serverIP = "";
+	    int Port = 0;
+	    Socket sock;
+	    BufferedReader reader;
+	    PrintWriter writer;
+	    ArrayList<String> userList = new ArrayList();
+	    Boolean isConnected = false;
 
 	public Controller() {
-		// TODO Auto-generated constructor stub
+		// useless
 	}
 	
 	 public void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -31,7 +54,7 @@ public class Controller{
 	                chatTextArea.append("Impossible de se connecter, réessayer !\n");
 	                usernameField.setEditable(true);
 	            }
-	            ListenThread();
+	           // ListenThread();
 	        } else if (isConnected == true) {
 	            chatTextArea.append("Vous êtes déjà connecté. \n");
 	        }
