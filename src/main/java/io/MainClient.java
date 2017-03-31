@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -78,6 +79,22 @@ public class MainClient {
 	
 	public static void main(String[] args){
 //		PropertyConfigurator.configure("log4j.properties");
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 //		try{
 //		MainClient.runClient();
@@ -86,14 +103,13 @@ public class MainClient {
 //			LOG.error("Error in client management");
 //			
 //		}
-		Window window = new Window();
+		ConnexionWindow window = new ConnexionWindow();
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
-		try { 
-		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
+		
+//		  Window window = new Window();
+//		  window.setVisible(true);
+//		  window.setLocationRelativeTo(null);
 		
 		try{
 		MainClient.runClient();

@@ -20,6 +20,7 @@ import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.LayoutStyle;
 
 /**
@@ -32,7 +33,7 @@ public class Window extends javax.swing.JFrame {
 	
     // Variables declaration - do not modify                     
     private javax.swing.JTextArea chatTextArea;
-    private javax.swing.JButton connectButton;
+
     private javax.swing.JButton disconnectButton;
     private javax.swing.JTextPane inputTextArea;
     private javax.swing.JLabel usernameLabel;
@@ -41,7 +42,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JScrollPane messageList;
     private javax.swing.JScrollPane usersListPanel;
     private javax.swing.JButton sendButton;
-    private javax.swing.JTextField usernameField;
+    private JLabel usernameField;
     private javax.swing.JTextArea usersList;
     private javax.swing.JComboBox emo;
     // End of variables declaration              
@@ -159,12 +160,13 @@ public class Window extends javax.swing.JFrame {
                chatTextArea.append("Échec de la déconnexion. \n");
         }
         isConnected = false;
-        usernameField.setEditable(true);
         usersList.setText("");
 
       }
+public void getConnexion(String txtconnexion){
+ 	usernameField.setText(txtconnexion);    
+}
 
-    
     /*	 Initialisation du visuel  	*/
     
     private void initComponents() {
@@ -181,20 +183,24 @@ public class Window extends javax.swing.JFrame {
     	        };
     	 
 
+    	
+    	
+  
 
         inputMessage = new javax.swing.JScrollPane();
         inputTextArea = new javax.swing.JTextPane();
         messageList = new javax.swing.JScrollPane();
         chatTextArea = new javax.swing.JTextArea();
         usernameLabel = new javax.swing.JLabel();
-        usernameField = new javax.swing.JTextField();
-        connectButton = new javax.swing.JButton();
+        usernameField = new javax.swing.JLabel();
         disconnectButton = new javax.swing.JButton();
         sendButton = new javax.swing.JButton();
         usersListPanel = new javax.swing.JScrollPane();
         usersList = new javax.swing.JTextArea();
         onlineLabel = new javax.swing.JLabel();
         
+        
+
         String[] tab = {"", " :) ", " :( ", " :/ ", " :s "};
         emo = new JComboBox(items);
         emo.setPreferredSize(new Dimension(100, 20));
@@ -217,13 +223,6 @@ public class Window extends javax.swing.JFrame {
         messageList.setViewportView(chatTextArea);
 
         usernameLabel.setText("Username:");
-
-        connectButton.setText("Connexion");
-        connectButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                controller.connectButtonActionPerformed(evt);
-            }
-        });
 
         disconnectButton.setText("Déconnexion");
         disconnectButton.addActionListener(new java.awt.event.ActionListener() {
@@ -292,10 +291,9 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addComponent(inputMessage, GroupLayout.DEFAULT_SIZE,396, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emo, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(emo, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sendButton, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
                     .addComponent(messageList, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 500 ,Short.MAX_VALUE)
@@ -304,8 +302,6 @@ public class Window extends javax.swing.JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(connectButton)
-                        .addGap(18, 18, 18)
                         .addComponent(disconnectButton)))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -319,7 +315,6 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(disconnectButton)
-                    .addComponent(connectButton)
                     .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(usernameLabel, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(onlineLabel))
