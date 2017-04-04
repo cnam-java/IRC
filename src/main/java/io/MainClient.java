@@ -1,4 +1,3 @@
-
 package io;
 
 import java.io.BufferedWriter;
@@ -103,6 +102,8 @@ public class MainClient {
 //			LOG.error("Error in client management");
 //			
 //		}
+		
+		//Appel première fenêtre connexion
 		ConnexionWindow window = new ConnexionWindow();
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
