@@ -75,7 +75,6 @@ public class MainClient {
 	}
 	
 	public static void main(String[] args){
-//		PropertyConfigurator.configure("log4j.properties");
 		
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -102,7 +101,7 @@ public class MainClient {
 //		}
 		try {
 			ConsoleHandler console = new ConsoleHandler();
-			FileHandler fh = new FileHandler("./windowLogger.log", true);
+			FileHandler fh = new FileHandler("./clientLogger.log", true);
 			SimpleFormatter sf = new SimpleFormatter();
 		
 			LOG.addHandler(console); 

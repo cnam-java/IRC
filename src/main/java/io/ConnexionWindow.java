@@ -15,7 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ConnexionWindow extends JFrame{
 	
-    // Déclaration des variables
+    // DÃ©claration des variables
     private JLabel usernameLabel;
     private JTextField usernameField;
     private JLabel ipLabel;
@@ -27,13 +27,13 @@ public class ConnexionWindow extends JFrame{
         this.setSize(600, 300);
     }
     
-    // Récupération du nom d'utilisateur
+    // RÃ©cupÃ©ration du nom d'utilisateur
     public String getUsername(){   
         return this.usernameField.getText();
     }
 
     
-    // Initialisation de la fenêtre de connexion
+    // Initialisation de la fenÃªtre de connexion
     private void initConnexion() {
     	
     	  final Controller controller = new Controller();
@@ -75,7 +75,7 @@ public class ConnexionWindow extends JFrame{
               }
           });
 
-          // Création de la fenêtre de connexion et des composants
+          // CrÃ©ation de la fenÃªtre de connexion et des composants
           GroupLayout layout = new GroupLayout(getContentPane());
           getContentPane().setLayout(layout);           
           layout.setHorizontalGroup(

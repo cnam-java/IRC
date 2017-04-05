@@ -1,14 +1,20 @@
 package io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class Controller{
+		
+		private static final int SERVER_PORT = 12345;
 	
-	  private javax.swing.JTextArea chatTextArea;
+		private javax.swing.JTextArea chatTextArea;
 	    private javax.swing.JButton connectButton;
 	    private javax.swing.JButton disconnectButton;
 	    private javax.swing.JTextPane inputTextArea;
@@ -21,12 +27,17 @@ public class Controller{
 	    private javax.swing.JTextField usernameField;
 	    private javax.swing.JTextArea usersList;
 	    private javax.swing.JComboBox emo;
+	    private javax.swing.JTextField ipField;
 	    
 	    String username, serverIP = "";
-	    int Port = 0;
 	    Socket sock;
-	    BufferedReader reader;
-	    PrintWriter writer;
+
+		OutputStream out = null;
+		OutputStreamWriter osw = null;
+		BufferedWriter bw = null;
+		
+	    //BufferedReader reader;
+	    //PrintWriter writer;
 	    ArrayList<String> userList = new ArrayList();
 	    Boolean isConnected = false;
 
@@ -43,20 +54,31 @@ public class Controller{
 
 
 	            try {
-	                sock = new Socket(serverIP, Port);
-	                InputStreamReader streamreader = new InputStreamReader(sock.getInputStream());
-	                reader = new BufferedReader(streamreader);
-	                writer = new PrintWriter(sock.getOutputStream());
-	                writer.println(username + ":est connecté.:Connecté"); // Displays to everyone that user connected.
-	                writer.flush(); // flushes the buffer
+//	                sock = new Socket(serverIP, SERVER_PORT);
+	            	serverIP = ipField.getText(); 
+	            	sock = new Socket(InetAddress.getByName(serverIP), SERVER_PORT);
+	                out = sock.getOutputStream();
+					osw = new OutputStreamWriter(out, "UTF-8");
+					bw = new BufferedWriter(osw);
+					bw.write("");
+					bw.newLine();					
+					bw.flush();
+					
+//	                InputStreamReader streamreader = new InputStreamReader(sock.getInputStream());
+//	                reader = new BufferedReader(streamreader);
+//	                writer = new PrintWriter(sock.getOutputStream());
+//	                writer.println(username + ":est connectÃ©.:ConnectÃ©"); // Displays to everyone that user connected.
+//	                writer.flush(); // flushes the buffer
+	                
+	                
 	                isConnected = true; // Used to see if the client is connected.
 	            } catch (Exception ex) {
-	                chatTextArea.append("Impossible de se connecter, réessayer !\n");
+	                chatTextArea.append("Impossible de se connecter, rÃ©essayer !\n");
 	                usernameField.setEditable(true);
 	            }
 	           // ListenThread();
 	        } else if (isConnected == true) {
-	            chatTextArea.append("Vous êtes déjà connecté. \n");
+	            chatTextArea.append("Vous Ãªtes dÃ©jÃ  connectÃ©. \n");
 	        }
 	    }                                             
 
@@ -78,9 +100,9 @@ public class Controller{
 	        } else {
 	            try {
 //	               writer.println(username + ":" + inputTextArea.getText() + ":" + "Chat");
-	               writer.flush(); // flushes the buffer
+	               bw.flush(); // flushes the buffer
 	            } catch (Exception ex) {
-	                chatTextArea.append("Message non envoyé \n");
+	                chatTextArea.append("Message non envoyÃ© \n");
 	            }
 	            
 	            inputTextArea.setText("");
@@ -93,12 +115,12 @@ public class Controller{
 	    
 	    public void sendDisconnect() {
 	    
-	           String bye = (username + ": :Déconnecté");
+	           String bye = (username + ": :DÃ©connectÃ©");
 	            try{
-	                writer.println(bye); // Sends server the disconnect signal.
-	                writer.flush(); // flushes the buffer
+	                bw.write(bye); // Sends server the disconnect signal.
+	                bw.flush(); // flushes the buffer
 	            } catch (Exception e) {
-	                chatTextArea.append("Impossible d'envoyer le message déconnecté.\n");
+	                chatTextArea.append("Impossible d'envoyer le message dÃ©connectÃ©.\n");
 	            }
 	    
 	          }
@@ -106,10 +128,10 @@ public class Controller{
 	        public void Disconnect() {
 
 	            try {
-	                    chatTextArea.append("Déconnecter.\n");
+	                    chatTextArea.append("DÃ©connecter.\n");
 	                   sock.close();
 	            } catch(Exception ex) {
-	                   chatTextArea.append("Échec de la déconnexion. \n");
+	                   chatTextArea.append("Echec de la dÃ©connexion. \n");
 	            }
 	            isConnected = false;
 	            usernameField.setEditable(true);
