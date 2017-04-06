@@ -1,5 +1,7 @@
 package io;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -60,17 +62,23 @@ public class Controller{
 	        }
 	    }                                             
 
-	    public void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+	    public void disconnectButtonActionPerformed(ActionEvent evt) {                                                 
 	        // TODO add your handling code here:
 //	        sendDisconnect();l
-	        Disconnect();
+	    	evt.dispose();
+	    	ConnexionWindow connexionwindow = new ConnexionWindow();
+	    	connexionwindow.setVisible(true);
+	    	connexionwindow.setLocationRelativeTo(null);
+	        //Disconnect();
 	    }                                       
 	    
 	    
 	    
 
-	    public void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+	    public void sendButtonActionPerformed(ActionEvent evt) {                                           
 	        // TODO add your handling code here:
+	    	
+	    	
 	        String nothing = "";
 	        if ((inputTextArea.getText()).equals(nothing)) {
 	            inputTextArea.setText("");
