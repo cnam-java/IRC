@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import json.Message;
+
 public class Controller{
 		
 		private static final int SERVER_PORT = 12345;

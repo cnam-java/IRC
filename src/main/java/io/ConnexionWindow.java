@@ -13,6 +13,8 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import json.Message;
+
 public class ConnexionWindow extends JFrame{
 	
     // Déclaration des variables
@@ -32,7 +34,6 @@ public class ConnexionWindow extends JFrame{
         return this.usernameField.getText();
     }
 
-    
     // Initialisation de la fenêtre de connexion
     private void initConnexion() {
     	
@@ -56,6 +57,10 @@ public class ConnexionWindow extends JFrame{
           // Action sur le bouton de connexion, message d'erreur si manque d'informations
           connectButton.addActionListener(new java.awt.event.ActionListener() {
               public void actionPerformed(java.awt.event.ActionEvent evt) {
+					Message mess = new Message();
+					String nickname = usernameField.getText();
+					String serverIp = ipField.getText();
+					String message = mess.connectMessage(nickname, serverIp);
             	   if(usernameField.getText().isEmpty() && ipField.getText().isEmpty()){
             		  JOptionPane.showMessageDialog(null, "Choissisez un nom d'utilisateur et entrez une adresse ip", "Information", JOptionPane.INFORMATION_MESSAGE);
             	  }

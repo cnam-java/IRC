@@ -36,7 +36,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class Window extends javax.swing.JFrame {
 	
-    // Déclaration des variables               
+    // DÃ©claration des variables               
     private JTextArea chatTextArea;
     private JButton disconnectButton;
     private JTextPane inputTextArea;
@@ -48,38 +48,47 @@ public class Window extends javax.swing.JFrame {
     private JButton sendButton;
     private JLabel usernameField;
     private JTextArea usersList;
+    private JTextField channelField;
 
 
-    // Lancement de la fenêtre de chat et du choix pour le canal de discussion
+    // Lancement de la fenÃªtre de chat et du choix pour le canal de discussion
     public Window() {
         initComponents();
         chanelChat();
+    }
+    
+    public String getChannel(){
+    	return this.channelField.getText();
+    }
+    
+    public String getMessage(){
+    	return this.inputTextArea.getText();
     }
 
     // Message de choix du canal de discussion
     private void chanelChat() {  	
     	  String[] options = {"OK"};
 		  JPanel panel = new JPanel();
-		  JLabel lbl = new JLabel("Entrez un cannal à rejoindre ou à créer");
-		  JTextField txt = new JTextField(10);
+		  JLabel lbl = new JLabel("Entrez un canal Ã  rejoindre ou Ã  crÃ©er :");
+		  channelField = new JTextField(10);
 		  panel.add(lbl);
-		  panel.add(txt);
-		  int selectedOption = JOptionPane.showOptionDialog(null, panel, "Cannel de discussion", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+		  panel.add(channelField);
+		  int selectedOption = JOptionPane.showOptionDialog(null, panel, "Canal de discussion", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 			
-		  if(txt.getText().isEmpty() && selectedOption == 0){
+		  if(channelField.getText().isEmpty() && selectedOption == 0){
 				chanelChat();
 			} else if (selectedOption != 0){
 				System.exit(0);
 			}
 	}
 
-	// Récupération du nom d'utilisateur à partir de la fenêtre de connexion
+	// RÃ©cupÃ©ration du nom d'utilisateur Ã  partir de la fenÃªtre de connexion
 	public void getConnexion(String txtconnexion){
 	 	usernameField.setText(txtconnexion);    
 	}
 
 	
-    // Création de la fenêtre du chat
+    // CrÃ©ation de la fenÃªtre du chat
     private void initComponents() {
 
     	final Controller controller = new Controller();
@@ -131,7 +140,7 @@ public class Window extends javax.swing.JFrame {
         usersListPanel.setViewportView(usersList);
         
         sendButton.setText("Connexion");
-        disconnectButton.setText("Déconnexion");
+        disconnectButton.setText("DÃ©connexion");
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineLabel.setText("Online Users");
@@ -162,7 +171,7 @@ public class Window extends javax.swing.JFrame {
         });
         
         
-        // Création de la fenêtre de chat et des composants
+        // CrÃ©ation de la fenÃªtre de chat et des composants
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
