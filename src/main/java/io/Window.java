@@ -10,6 +10,7 @@ package io;
 
 
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
@@ -29,6 +30,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controller.ConnectionButtonListener;
+import controller.DeconnexionButtonListener;
+import controller.SendButtonListener;
+
 /**
  * 
  * @author Cnam
@@ -45,16 +50,26 @@ public class Window extends javax.swing.JFrame {
     private JScrollPane inputMessage;
     private JScrollPane messageList;
     private JScrollPane usersListPanel;
-    private JButton sendButton;
+    
+
+
+	private JButton sendButton;
     private JLabel usernameField;
     private JTextArea usersList;
 
 
+    private static Window INSTANCE = new Window();
+    
     // Lancement de la fenêtre de chat et du choix pour le canal de discussion
-    public Window() {
+    private Window() {
         initComponents();
         chanelChat();
+        
     }
+    
+    public static Window getInstance() {
+		return INSTANCE;
+	}
 
     // Message de choix du canal de discussion
     private void chanelChat() {  	
@@ -79,10 +94,13 @@ public class Window extends javax.swing.JFrame {
 	}
 
 	
-    // Création de la fenêtre du chat
-    private void initComponents() {
+    public void setUsernameField(String username) {
+		this.usernameField.setText(username);
+	}
 
-    	final Controller controller = new Controller();
+	// Création de la fenêtre du chat
+    private void initComponents() {
+    	
     	final Object[] items =
     	        {
     	            new ImageIcon("images/lol_icon.png"),
@@ -130,7 +148,11 @@ public class Window extends javax.swing.JFrame {
         usersList.setRows(5);
         usersListPanel.setViewportView(usersList);
         
-        sendButton.setText("Connexion");
+        sendButton.setText("Envoyer");
+        sendButton.addActionListener(new SendButtonListener());
+        sendButton.addKeyListener(new SendButtonListener());
+        inputTextArea.addKeyListener(new SendButtonListener());
+        disconnectButton.addActionListener(new DeconnexionButtonListener());
         disconnectButton.setText("Déconnexion");
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -213,5 +235,23 @@ public class Window extends javax.swing.JFrame {
         );
 
         pack();
-    }                                                                             
+         
+    }
+    
+    public JTextArea getChatTextArea() {
+		return chatTextArea;
+	}
+
+	public void setChatTextArea(JTextArea chatTextArea) {
+		this.chatTextArea = chatTextArea;
+	}
+
+	public JTextPane getInputTextArea() {
+		return inputTextArea;
+	}
+
+	public String getUsernameField() {
+		return this.usernameField.getText();
+	}
+	
 }

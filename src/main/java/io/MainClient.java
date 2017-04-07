@@ -16,12 +16,10 @@ import org.apache.log4j.PropertyConfigurator;
 
 public class MainClient {
 	private static final Logger LOG = Logger.getLogger(MainClient.class.getName());
-	private static final String NICKNAME = "Andrea";
 	private static final int SERVER_PORT = 12345;
-	private static final String SERVER_HOST = "10.42.0.1";
 	
 	
-	public static void runClient() throws ClientException{
+	public static void runClient(String SERVER_HOST,String NICKNAME) throws ClientException{
 		Scanner sc = null;
 		Socket s = null;
 		
@@ -95,16 +93,9 @@ public class MainClient {
 			e1.printStackTrace();
 		}
 
-//		try{
-//		MainClient.runClient();
-//		System.exit(0);
-//		}catch(ClientException e){
-//			LOG.error("Error in client management");
-//			
-//		}
 		
 		//Appel première fenêtre connexion
-		ConnexionWindow window = new ConnexionWindow();
+		ConnexionWindow window = ConnexionWindow.getInstance();
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
 		
@@ -112,13 +103,13 @@ public class MainClient {
 //		  window.setVisible(true);
 //		  window.setLocationRelativeTo(null);
 		
-		try{
-		MainClient.runClient();
-		System.exit(0);
-		}catch(ClientException e){
-			LOG.error("Error in client management");
-			
-		}
+//		try{
+//		MainClient.runClient();
+//		System.exit(0);
+//		}catch(ClientException e){
+//			LOG.error("Error in client management");
+//			
+//		}
 	}
 
 }

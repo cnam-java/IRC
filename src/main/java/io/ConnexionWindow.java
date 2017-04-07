@@ -1,6 +1,7 @@
 package io;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -13,30 +14,45 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import controller.ConnectionButtonListener;
+import controller.SendButtonListener;
+
 public class ConnexionWindow extends JFrame{
+	
+	
 	
     // Déclaration des variables
     private JLabel usernameLabel;
-    private JTextField usernameField;
+    static private JTextField usernameField;
     private JLabel ipLabel;
-    private JTextField ipField;
+    static private JTextField ipField;
     private JButton connectButton;
     
-    public ConnexionWindow() {
+    private static ConnexionWindow INSTANCE = new ConnexionWindow();
+    
+    private ConnexionWindow() {
         initConnexion();
         this.setSize(600, 300);
     }
     
+    public static ConnexionWindow getInstance() {
+		return INSTANCE;
+	}
+    
     // Récupération du nom d'utilisateur
     public String getUsername(){   
-        return this.usernameField.getText();
+        return usernameField.getText();
+    }
+    
+    // Récupération du nom d'utilisateur
+    public String getIpField(){   
+        return ipField.getText();
     }
 
     
     // Initialisation de la fenêtre de connexion
     private void initConnexion() {
     	
-    	  final Controller controller = new Controller();
     	  usernameLabel = new JLabel();
           usernameField = new JTextField();
           ipLabel = new JLabel();
@@ -54,26 +70,9 @@ public class ConnexionWindow extends JFrame{
           connectButton.setText("Connexion");
           
           // Action sur le bouton de connexion, message d'erreur si manque d'informations
-          connectButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	   if(usernameField.getText().isEmpty() && ipField.getText().isEmpty()){
-            		  JOptionPane.showMessageDialog(null, "Choissisez un nom d'utilisateur et entrez une adresse ip", "Information", JOptionPane.INFORMATION_MESSAGE);
-            	  }
-            	   else if(usernameField.getText().isEmpty()){
-              		  JOptionPane.showMessageDialog(null, "Choissisez un nom d'utilisateur", "Information", JOptionPane.INFORMATION_MESSAGE);
-              	  }
-            	  else if(ipField.getText().isEmpty()){
-            		  JOptionPane.showMessageDialog(null, "Entrez une adresse ip", "Information", JOptionPane.INFORMATION_MESSAGE); 	 
-            	  }
-            	  else{
-                	  Window window = new Window();
-              		  window.setVisible(true);
-            		  window.setLocationRelativeTo(null);
-            		  window.getConnexion(usernameField.getText());
-            		  dispose();
-            	  }
-              }
-          });
+          connectButton.addActionListener(new ConnectionButtonListener());
+          usernameField.addKeyListener(new ConnectionButtonListener());
+          ipField.addKeyListener(new ConnectionButtonListener());
 
           // Création de la fenêtre de connexion et des composants
           GroupLayout layout = new GroupLayout(getContentPane());
@@ -122,5 +121,9 @@ public class ConnexionWindow extends JFrame{
               				)
             		  );
                     getContentPane().setLayout(layout);
-                    pack();       
-    }}
+                    pack();
+                    
+                    
+    }
+    
+}
