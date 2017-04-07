@@ -87,12 +87,6 @@ public class Window extends javax.swing.JFrame {
 				System.exit(0);
 			}
 	}
-
-	// Récupération du nom d'utilisateur à partir de la fenêtre de connexion
-	public void getConnexion(String txtconnexion){
-	 	usernameField.setText(txtconnexion);    
-	}
-
 	
     public void setUsernameField(String username) {
 		this.usernameField.setText(username);
