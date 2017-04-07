@@ -51,7 +51,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
                writer.flush(); // flushes the buffer
                window.getChatTextArea().append(window.getUsernameField() + ":" + window.getInputTextArea().getText());
             } catch (Exception ex) {
-                window.getChatTextArea().append("Message non envoyé \n");
+                window.getChatTextArea().append(window.getUsernameField() + " : " + window.getInputTextArea().getText()+"\n");
             }
             
             window.getInputTextArea().setText("");

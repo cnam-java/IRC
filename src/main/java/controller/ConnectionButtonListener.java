@@ -67,7 +67,7 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	  	      	window.setVisible(true);
 	  	  		window.setLocationRelativeTo(null);
 	  	  		window.setUsernameField(connexionwindow.getUsername());
-	  			
+	  			//MainClient.runClient(SERVER_HOST, NICKNAME);
 //	  			}catch(ClientException e){
 //	  				JOptionPane.showMessageDialog(null, "Erreur de connexion avec le server", "Information", JOptionPane.INFORMATION_MESSAGE); 
 //	  				

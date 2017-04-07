@@ -95,9 +95,9 @@ public class MainClient {
 
 		
 		//Appel première fenêtre connexion
-		ConnexionWindow window = ConnexionWindow.getInstance();
-		window.setVisible(true);
-		window.setLocationRelativeTo(null);
+		ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
+		connexionwindow.setVisible(true);
+		connexionwindow.setLocationRelativeTo(null);
 		
 //		  Window window = new Window();
 //		  window.setVisible(true);
