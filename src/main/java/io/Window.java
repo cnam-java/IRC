@@ -10,7 +10,11 @@ package io;
 
 
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
@@ -29,6 +33,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
 import controller.ConnectionButtonListener;
 import controller.DeconnexionButtonListener;
@@ -42,7 +48,7 @@ import controller.SendButtonListener;
 public class Window extends javax.swing.JFrame {
 	
     // Déclaration des variables               
-    private JTextArea chatTextArea;
+    private JTextPane chatTextArea;
     private JButton disconnectButton;
     private JTextPane inputTextArea;
     private JLabel usernameLabel;
@@ -51,7 +57,8 @@ public class Window extends javax.swing.JFrame {
     private JScrollPane messageList;
     private JScrollPane usersListPanel;
     
-
+    private JLabel channelLabel;
+    private JLabel channelField;
 
 	private JButton sendButton;
     private JLabel usernameField;
@@ -86,12 +93,28 @@ public class Window extends javax.swing.JFrame {
 			} else if (selectedOption != 0){
 				System.exit(0);
 			}
+		  setChanelField(txt.getText());
 	}
 	
     public void setUsernameField(String username) {
 		this.usernameField.setText(username);
 	}
+    
+    public void setChanelField(String chanel) {
+		this.channelField.setText(chanel);
+	}
+    
+    public void addSpace() {
+		final StyledDocument doc = inputTextArea.getStyledDocument();
 
+    	try {
+		    doc.insertString(doc.getLength(), " ", null );
+		} catch (BadLocationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+    
 	// Création de la fenêtre du chat
     private void initComponents() {
     	
@@ -111,15 +134,23 @@ public class Window extends javax.swing.JFrame {
         inputMessage = new JScrollPane();
         inputTextArea = new JTextPane();
         messageList = new JScrollPane();
-        chatTextArea = new JTextArea();
+        chatTextArea = new JTextPane();
         usernameLabel = new JLabel();
         usernameField = new JLabel();
+        channelLabel = new JLabel();
+        channelField = new JLabel();
         disconnectButton = new JButton();
         sendButton = new JButton();
         usersListPanel = new JScrollPane();
         usersList = new JTextArea();
         onlineLabel = new JLabel();        
        
+	    Toolkit kit = Toolkit.getDefaultToolkit();
+	       
+	    // Modifier l'icône de JFrame
+	    Image img = kit.getImage("images/hungry_icon.png");
+	    setIconImage(img);
+        
         emoList.setVisibleRowCount(1);
         emoList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,14 +159,13 @@ public class Window extends javax.swing.JFrame {
         inputTextArea.setFont(fontText);
         inputMessage.setViewportView(inputTextArea);
 
-        chatTextArea.setColumns(20);
+
         chatTextArea.setEditable(false);
         chatTextArea.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        chatTextArea.setLineWrap(true);
-        chatTextArea.setRows(5);
         messageList.setViewportView(chatTextArea);
 
-        usernameLabel.setText("Username:");
+        usernameLabel.setText("Username :");
+        channelLabel.setText("Chanel :");
 
         usersList.setEditable(false);
         usersList.setColumns(20);
@@ -151,6 +181,43 @@ public class Window extends javax.swing.JFrame {
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineLabel.setText("Online Users");
+        
+        //Ajout des smileys quand l'icon sélectionné pour le remettre après
+        emoList.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList)evt.getSource();
+                if (evt.getClickCount() == 2) {
+
+                	if(emoList.isSelectedIndex(0)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/lol_icon_chat.png"));
+                    	addSpace();
+                	}else if(emoList.isSelectedIndex(1)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/hungry_icon_chat.png"));	
+                    	addSpace();
+					} else if(emoList.isSelectedIndex(2)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));
+                    	addSpace();
+					} else if(emoList.isSelectedIndex(3)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/monkey_icon_chat.png"));
+                    	addSpace();
+					} else if(emoList.isSelectedIndex(4)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));
+                    	addSpace();
+					} else if(emoList.isSelectedIndex(5)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/angry_icon_chat.png"));
+                    	addSpace();
+					} else if(emoList.isSelectedIndex(6)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/penguin_icon_chat.png"));
+                    	addSpace();
+					} else if(emoList.isSelectedIndex(7)){
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/panda_icon_chat.png"));
+                    	addSpace();
+					}
+                }
+            }
+        });
+        
+        
    
         // Ajout des Icons dans la zone de saisie du texte au format plus petits
         emoList.addListSelectionListener(new ListSelectionListener() {	
@@ -158,20 +225,28 @@ public class Window extends javax.swing.JFrame {
                 if(e.getValueIsAdjusting()) {
                 	if(emoList.isSelectedIndex(0)){
                     	inputTextArea.insertIcon((Icon) new ImageIcon("images/lol_icon_chat.png"));
+                    	addSpace();
                 	}else if(emoList.isSelectedIndex(1)){
                     	inputTextArea.insertIcon((Icon) new ImageIcon("images/hungry_icon_chat.png"));	
+                    	addSpace();
 					} else if(emoList.isSelectedIndex(2)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));	
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));
+                    	addSpace();
 					} else if(emoList.isSelectedIndex(3)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/monkey_icon_chat.png"));	
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/monkey_icon_chat.png"));
+                    	addSpace();
 					} else if(emoList.isSelectedIndex(4)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));	
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));
+                    	addSpace();
 					} else if(emoList.isSelectedIndex(5)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/angry_icon_chat.png"));	
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/angry_icon_chat.png"));
+                    	addSpace();
 					} else if(emoList.isSelectedIndex(6)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/penguin_icon_chat.png"));	
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/penguin_icon_chat.png"));
+                    	addSpace();
 					} else if(emoList.isSelectedIndex(7)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/panda_icon_chat.png"));	
+                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/panda_icon_chat.png"));
+                    	addSpace();
 					}
                 }
             }
@@ -196,12 +271,16 @@ public class Window extends javax.swing.JFrame {
             				.addPreferredGap(ComponentPlacement.UNRELATED)
             				.addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
             				.addPreferredGap(ComponentPlacement.RELATED)
+            				    .addComponent(channelLabel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                				.addPreferredGap(ComponentPlacement.UNRELATED)
+                			.addComponent(channelField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+            				.addPreferredGap(ComponentPlacement.RELATED)
             				.addComponent(disconnectButton))
             				.addComponent(inputMessage, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE))
             			    .addPreferredGap(ComponentPlacement.UNRELATED)
             			.addGroup(layout.createParallelGroup(Alignment.LEADING)
             				.addComponent(onlineLabel, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-            				.addComponent(usersListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            				.addComponent(usersListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             			.addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,6 +291,8 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(disconnectButton)
                     .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(usernameLabel, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(channelField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)                        
+                    .addComponent(channelLabel	, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(onlineLabel))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
@@ -221,8 +302,8 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(inputMessage, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)                            
                     .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        			.addComponent(emoList, GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
-        			.addComponent(sendButton, GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE))
+        			.addComponent(emoList, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(sendButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
         			.addGap(10))
                     .addComponent(usersListPanel))
                     .addContainerGap())
@@ -232,11 +313,11 @@ public class Window extends javax.swing.JFrame {
          
     }
     
-    public JTextArea getChatTextArea() {
+    public JTextPane getChatTextArea() {
 		return chatTextArea;
 	}
 
-	public void setChatTextArea(JTextArea chatTextArea) {
+	public void setChatTextArea(JTextPane chatTextArea) {
 		this.chatTextArea = chatTextArea;
 	}
 

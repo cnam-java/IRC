@@ -1,6 +1,8 @@
 package io;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import javax.swing.GroupLayout;
@@ -65,6 +67,11 @@ public class ConnexionWindow extends JFrame{
           ipLabel.setText("Ip du serveur");
           usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
           ipLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	      Toolkit kit = Toolkit.getDefaultToolkit();
+	       
+	       // Modifier l'icône de JFrame
+	      Image img = kit.getImage("images/hungry_icon.png");
+	      setIconImage(img);
           setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
           setTitle("Chat IRC Cnam");
           connectButton.setText("Connexion");

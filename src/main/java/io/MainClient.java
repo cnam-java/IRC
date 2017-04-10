@@ -35,9 +35,7 @@ public class MainClient {
 		sc = new Scanner(System.in);
 		while(true){
 			try{
-				
-				
-				
+								
 				final String msg = sc.nextLine();
 				
 				s = new Socket(InetAddress.getByName(SERVER_HOST), SERVER_PORT);
