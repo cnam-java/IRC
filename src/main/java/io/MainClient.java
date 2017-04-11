@@ -1,20 +1,17 @@
 package io;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 public class MainClient {
+<<<<<<< HEAD
 	private static final Logger LOG = Logger.getLogger(MainClient.class.getName());
 	private static final int SERVER_PORT = 12345;
 	
@@ -66,14 +63,21 @@ public class MainClient {
 		}
 		
 	}
+=======
+>>>>>>> ga_cr
 	
+	public static final Logger logger = Logger.getLogger(MainClient.class.getName());
+
+    private static FileHandler fileHandler = null;
+    private static SimpleFormatter simpleFormatter = null;
+    private static final String file = "./clientLogger.log";
+    
 	public MainClient(){
 		//useless
 	
 	}
 	
 	public static void main(String[] args){
-//		PropertyConfigurator.configure("log4j.properties");
 		
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -91,6 +95,7 @@ public class MainClient {
 			e1.printStackTrace();
 		}
 
+<<<<<<< HEAD
 		
 		//Appel première fenêtre connexion
 		ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
@@ -108,6 +113,30 @@ public class MainClient {
 //			LOG.error("Error in client management");
 //			
 //		}
+=======
+		try {
+			
+//			simpleFormatter = new SimpleFormatter();
+//			try {
+//				fileHandler = new FileHandler(file, 0, 1, true);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//        	fileHandler.setFormatter(simpleFormatter);
+//        	logger.addHandler(fileHandler);
+//        	logger.setUseParentHandlers(false);
+//        	logger.setLevel(java.util.logging.Level.FINEST);
+        	
+            //Appel premiÃ¨re fenÃªtre de connexion
+            ConnexionWindow window = new ConnexionWindow();
+    		window.setVisible(true);
+    		window.setLocationRelativeTo(null);
+    		logger.log(Level.INFO,"Window instanciated.");
+		
+		} catch (SecurityException e) {
+			logger.log(Level.SEVERE, "Security error in FileHandler :"+ e); 
+		}
+>>>>>>> ga_cr
 	}
-
 }

@@ -18,12 +18,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import controller.ConnectionButtonListener;
 import controller.SendButtonListener;
+import json.Message;
 
 public class ConnexionWindow extends JFrame{
 	
-	
-	
-    // Déclaration des variables
+    // DÃ©claration des variables
     private JLabel usernameLabel;
     static private JTextField usernameField;
     private JLabel ipLabel;
@@ -41,18 +40,17 @@ public class ConnexionWindow extends JFrame{
 		return INSTANCE;
 	}
     
-    // Récupération du nom d'utilisateur
+    // RÃ©cupÃ©ration du nom d'utilisateur
     public String getUsername(){   
         return usernameField.getText();
     }
     
-    // Récupération du nom d'utilisateur
+    // RÃ©cupÃ©ration du nom d'utilisateur
     public String getIpField(){   
         return ipField.getText();
     }
 
-    
-    // Initialisation de la fenêtre de connexion
+    // Initialisation de la fenÃªtre de connexion
     private void initConnexion() {
     	
     	  usernameLabel = new JLabel();
@@ -69,7 +67,7 @@ public class ConnexionWindow extends JFrame{
           ipLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	      Toolkit kit = Toolkit.getDefaultToolkit();
 	       
-	       // Modifier l'icône de JFrame
+	       // Modifier l'icÃ´ne de JFrame
 	      Image img = kit.getImage("images/hungry_icon.png");
 	      setIconImage(img);
           setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,8 +78,8 @@ public class ConnexionWindow extends JFrame{
           connectButton.addActionListener(new ConnectionButtonListener());
           usernameField.addKeyListener(new ConnectionButtonListener());
           ipField.addKeyListener(new ConnectionButtonListener());
-
-          // Création de la fenêtre de connexion et des composants
+          
+          // CrÃ©ation de la fenÃªtre de connexion et des composants
           GroupLayout layout = new GroupLayout(getContentPane());
           getContentPane().setLayout(layout);           
           layout.setHorizontalGroup(
