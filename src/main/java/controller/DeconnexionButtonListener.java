@@ -2,6 +2,7 @@ package controller;
 
 import io.ConnexionWindow;
 import io.Window;
+import json.Message;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,12 +29,14 @@ public class DeconnexionButtonListener implements ActionListener  {
     
     public void sendDisconnect() {
     	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
-        String bye = (connexionwindow.getUsername() + ": :Déconnecté");
+    	Message mess = new Message();
+    	String disconnectMess = mess.exitMessage();
+        String bye = (connexionwindow.getUsername() + ": :DÃ©connectÃ©");
          try{
-             writer.write(bye); // Sends server the disconnect signal.
+             writer.write(disconnectMess); // Sends server the disconnect signal.
              writer.flush(); // flushes the buffer
          } catch (Exception e) {
-             chatTextArea.append("Impossible d'envoyer le message déconnecté.\n");
+             chatTextArea.append("Impossible d'envoyer le message dÃ©connectÃ©.\n");
          }
  
        }
@@ -41,10 +44,10 @@ public class DeconnexionButtonListener implements ActionListener  {
      public void Disconnect() {
 
          try {
-                 chatTextArea.append("Déconnecter.\n");
+                 chatTextArea.append("DÃ©connecter.\n");
                 //sock.close();
          } catch(Exception ex) {
-                chatTextArea.append("Échec de la déconnexion. \n");
+                chatTextArea.append("Echec de la dÃ©connexion. \n");
          }
 
        }

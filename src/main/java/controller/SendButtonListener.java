@@ -2,6 +2,7 @@ package controller;
 
 import io.ConnexionWindow;
 import io.Window;
+import json.Message;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +26,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 	     if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	     {
 	    	 // Recopier la meme methode que le action ??
-	    	 //System.out.println("entréé");
+	    	 //System.out.println("entrï¿½ï¿½");
 	    	 Send();
 	    	 
 	     }
@@ -35,7 +36,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 	     if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	     {
 	    	 // Recopier la meme methode que le action ??
-	    	 //System.out.println("entréé");
+	    	 //System.out.println("entrï¿½ï¿½");
 	    	 	Window window = Window.getInstance();
 	            window.getInputTextArea().setText(null);
 
@@ -65,14 +66,17 @@ public class SendButtonListener implements ActionListener, KeyListener  {
         // TODO add your handling code here:
     	
     	Window window = Window.getInstance();
+    	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
         String nothing = "";
         if ((window.getInputTextArea().getText()).equals(nothing)) {
         	window.getInputTextArea().setText("");
         	window.getInputTextArea().requestFocus();
         } else {
             try {
-//      METTRE JSON         writer.println(username + ":" + inputTextArea.getText() + ":" + "Chat");
-               writer.flush(); // flushes the buffer
+            	Message mess = new Message();
+            	String textMess = mess.textMessage(connexionwindow.getUsername(), window.getMessage());
+            	writer.write(textMess); 
+            	writer.flush(); // flushes the buffer
             } catch (Exception ex) {
             	writeArea();
             }

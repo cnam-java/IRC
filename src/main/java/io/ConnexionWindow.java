@@ -61,8 +61,8 @@ public class ConnexionWindow extends JFrame{
           JPanel pan = new JPanel();
           this.setContentPane(pan);
         
-          usernameLabel.setText("Username:");
-          ipLabel.setText("Ip du serveur");
+          usernameLabel.setText("Username : ");
+          ipLabel.setText("Server IP : ");
           usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
           ipLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	      Toolkit kit = Toolkit.getDefaultToolkit();
@@ -71,7 +71,7 @@ public class ConnexionWindow extends JFrame{
 	      Image img = kit.getImage("images/hungry_icon.png");
 	      setIconImage(img);
           setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-          setTitle("Chat IRC Cnam");
+          setTitle("Chat IRC CNAM");
           connectButton.setText("Connexion");
           
           // Action sur le bouton de connexion, message d'erreur si manque d'informations

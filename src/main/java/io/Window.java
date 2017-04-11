@@ -36,13 +36,14 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import controller.ChannelButtonListener;
 import controller.ConnectionButtonListener;
 import controller.DeconnexionButtonListener;
 import controller.SendButtonListener;
 
 /**
  * 
- * @author Cnam
+ * @author CNAM
  * 
  */
 public class Window extends javax.swing.JFrame {
@@ -90,11 +91,11 @@ public class Window extends javax.swing.JFrame {
     private void chanelChat() {  	
     	  String[] options = {"OK"};
 		  JPanel panel = new JPanel();
-		  JLabel lbl = new JLabel("Entrez un canal à rejoindre ou à créer :");
+		  JLabel lbl = new JLabel("Enter a channel to join or to create : ");
 		  JTextField txt = new JTextField(10);
 		  panel.add(lbl);
-		  panel.add(channelField);
-		  int selectedOption = JOptionPane.showOptionDialog(null, panel, "Canal de discussion", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+		  panel.add(txt);
+		  int selectedOption = JOptionPane.showOptionDialog(null, panel, "CHANNEL", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 			
 		  if(txt.getText().isEmpty() && selectedOption == 0){
 				chanelChat();
@@ -162,7 +163,7 @@ public class Window extends javax.swing.JFrame {
         emoList.setVisibleRowCount(1);
         emoList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Chat IRC Cnam");
+        setTitle("Chat IRC CNAM");
         Font fontText = new Font("Arial", Font.PLAIN, 14);
         inputTextArea.setFont(fontText);
         inputMessage.setViewportView(inputTextArea);
@@ -173,19 +174,19 @@ public class Window extends javax.swing.JFrame {
         messageList.setViewportView(chatTextArea);
 
         usernameLabel.setText("Username :");
-        channelLabel.setText("Chanel :");
+        channelLabel.setText("Channel :");
 
         usersList.setEditable(false);
         usersList.setColumns(20);
         usersList.setRows(5);
         usersListPanel.setViewportView(usersList);
         
-        sendButton.setText("Envoyer");
+        sendButton.setText("Send");
         sendButton.addActionListener(new SendButtonListener());
         sendButton.addKeyListener(new SendButtonListener());
         inputTextArea.addKeyListener(new SendButtonListener());
         disconnectButton.addActionListener(new DeconnexionButtonListener());
-        disconnectButton.setText("Déconnexion");
+        disconnectButton.setText("Deconnexion");
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineLabel.setText("Online Users");

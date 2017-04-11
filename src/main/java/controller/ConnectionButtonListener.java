@@ -4,6 +4,7 @@ import io.ClientException;
 import io.ConnexionWindow;
 import io.MainClient;
 import io.Window;
+import json.Message;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,8 +32,6 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	{
 	     if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	     {
-	    	// Recopier la meme methode que le action ??
-	    	 //System.out.println("entréé");
 	    	 Connect();
 	    	 
 	     }
@@ -49,6 +48,7 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	}
 	
 	public void Connect(){
+		
 		ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
 	  	   if(connexionwindow.getUsername().isEmpty() && connexionwindow.getIpField().isEmpty()){
 	  		  JOptionPane.showMessageDialog(null, "Choissisez un nom d'utilisateur et entrez une adresse ip", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -62,6 +62,9 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	  	  else{
 	      	 
 	  		//try{
+
+	  		  	Message mess = new Message();
+	  		  	mess.connectMessage(connexionwindow.getUsername(),connexionwindow.getIpField());
 	  			Window window = Window.getInstance();
 	  			connexionwindow.dispose();
 	  	      	window.setVisible(true);
