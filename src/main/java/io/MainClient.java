@@ -1,24 +1,23 @@
 package io;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.Scanner;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
-import java.util.logging.SimpleFormatter;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class MainClient {
-	private static final Logger LOG = Logger.getLogger(MainClient.class.getName());
 	
+	public static final Logger logger = Logger.getLogger(MainClient.class.getName());
+
+    private static FileHandler fileHandler = null;
+    private static SimpleFormatter simpleFormatter = null;
+    private static final String file = "./clientLogger.log";
+    
 	public MainClient(){
 		//useless
 	
@@ -43,27 +42,27 @@ public class MainClient {
 		}
 
 		try {
-			ConsoleHandler console = new ConsoleHandler();
-			FileHandler fh = new FileHandler("./clientLogger.log", true);
-			SimpleFormatter sf = new SimpleFormatter();
-		
-			LOG.addHandler(console); 
-			LOG.addHandler(fh);
-			fh.setFormatter(sf);
-            LOG.setLevel(Level.ALL);
-            
-            LOG.log(Level.CONFIG, "Configuration done.");
-            LOG.removeHandler(console);
-            
+			
+//			simpleFormatter = new SimpleFormatter();
+//			try {
+//				fileHandler = new FileHandler(file, 0, 1, true);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//        	fileHandler.setFormatter(simpleFormatter);
+//        	logger.addHandler(fileHandler);
+//        	logger.setUseParentHandlers(false);
+//        	logger.setLevel(java.util.logging.Level.FINEST);
+        	
             //Appel première fenêtre de connexion
             ConnexionWindow window = new ConnexionWindow();
     		window.setVisible(true);
     		window.setLocationRelativeTo(null);
+    		logger.log(Level.INFO,"Window instanciated.");
 		
 		} catch (SecurityException e) {
-			LOG.log(Level.SEVERE, "Security error in FileHandler.", e); 
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, "An error occured in FileHandler.", e);
+			logger.log(Level.SEVERE, "Security error in FileHandler :"+ e); 
 		}
 	}
 }
