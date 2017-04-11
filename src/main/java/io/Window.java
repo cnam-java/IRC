@@ -47,13 +47,8 @@ import controller.SendButtonListener;
  */
 public class Window extends javax.swing.JFrame {
 	
-<<<<<<< HEAD
-    // D�claration des variables               
-    private JTextPane chatTextArea;
-=======
     // Déclaration des variables               
-    private JTextArea chatTextArea;
->>>>>>> ga_cr
+	private JTextPane chatTextArea;
     private JButton disconnectButton;
     private JTextPane inputTextArea;
     private JLabel usernameLabel;
@@ -68,28 +63,21 @@ public class Window extends javax.swing.JFrame {
 	private JButton sendButton;
     private JLabel usernameField;
     private JTextArea usersList;
-    private JTextField channelField;
 
 
-<<<<<<< HEAD
     private static Window INSTANCE = new Window();
     
-    // Lancement de la fen�tre de chat et du choix pour le canal de discussion
-    private Window() {
-=======
     // Lancement de la fenêtre de chat et du choix pour le canal de discussion
-    public Window() {
->>>>>>> ga_cr
+    private Window() {
         initComponents();
         chanelChat();
         
     }
     
-<<<<<<< HEAD
     public static Window getInstance() {
 		return INSTANCE;
 	}
-=======
+
     public String getChannel(){
     	return this.channelField.getText();
     }
@@ -97,26 +85,24 @@ public class Window extends javax.swing.JFrame {
     public String getMessage(){
     	return this.inputTextArea.getText();
     }
->>>>>>> ga_cr
 
     // Message de choix du canal de discussion
     private void chanelChat() {  	
     	  String[] options = {"OK"};
 		  JPanel panel = new JPanel();
 		  JLabel lbl = new JLabel("Entrez un canal à rejoindre ou à créer :");
-		  channelField = new JTextField(10);
+		  JTextField txt = new JTextField(10);
 		  panel.add(lbl);
 		  panel.add(channelField);
 		  int selectedOption = JOptionPane.showOptionDialog(null, panel, "Canal de discussion", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 			
-		  if(channelField.getText().isEmpty() && selectedOption == 0){
+		  if(txt.getText().isEmpty() && selectedOption == 0){
 				chanelChat();
 			} else if (selectedOption != 0){
 				System.exit(0);
 			}
 		  setChanelField(txt.getText());
 	}
-<<<<<<< HEAD
 	
     public void setUsernameField(String username) {
 		this.usernameField.setText(username);
@@ -124,18 +110,11 @@ public class Window extends javax.swing.JFrame {
     
     public void setChanelField(String chanel) {
 		this.channelField.setText(chanel);
-=======
-
-	// Récupération du nom d'utilisateur à partir de la fenêtre de connexion
-	public void getConnexion(String txtconnexion){
-	 	usernameField.setText(txtconnexion);    
->>>>>>> ga_cr
 	}
     
     public void addSpace() {
 		final StyledDocument doc = inputTextArea.getStyledDocument();
 
-<<<<<<< HEAD
     	try {
 		    doc.insertString(doc.getLength(), " ", null );
 		} catch (BadLocationException e1) {
@@ -143,12 +122,8 @@ public class Window extends javax.swing.JFrame {
 			e1.printStackTrace();
 		}
 	}
-    
-	// Cr�ation de la fen�tre du chat
-=======
 	
     // Création de la fenêtre du chat
->>>>>>> ga_cr
     private void initComponents() {
     	
     	final Object[] items =
@@ -180,7 +155,7 @@ public class Window extends javax.swing.JFrame {
        
 	    Toolkit kit = Toolkit.getDefaultToolkit();
 	       
-	    // Modifier l'ic�ne de JFrame
+	    // Modifier l'icône de JFrame
 	    Image img = kit.getImage("images/hungry_icon.png");
 	    setIconImage(img);
         
@@ -205,22 +180,17 @@ public class Window extends javax.swing.JFrame {
         usersList.setRows(5);
         usersListPanel.setViewportView(usersList);
         
-<<<<<<< HEAD
         sendButton.setText("Envoyer");
         sendButton.addActionListener(new SendButtonListener());
         sendButton.addKeyListener(new SendButtonListener());
         inputTextArea.addKeyListener(new SendButtonListener());
         disconnectButton.addActionListener(new DeconnexionButtonListener());
-        disconnectButton.setText("D�connexion");
-=======
-        sendButton.setText("Connexion");
         disconnectButton.setText("Déconnexion");
->>>>>>> ga_cr
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineLabel.setText("Online Users");
         
-        //Ajout des smileys quand l'icon s�lectionn� pour le remettre apr�s
+        //Ajout des smileys quand l'icône sélectionné pour le remettre après
         emoList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList)evt.getSource();
@@ -257,7 +227,7 @@ public class Window extends javax.swing.JFrame {
         
         
    
-        // Ajout des Icons dans la zone de saisie du texte au format plus petits
+        // Ajout des icônes dans la zone de saisie du texte dans un plus petit format
         emoList.addListSelectionListener(new ListSelectionListener() {	
 			public void valueChanged(ListSelectionEvent e) {				
                 if(e.getValueIsAdjusting()) {

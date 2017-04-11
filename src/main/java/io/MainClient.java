@@ -1,6 +1,11 @@
 package io;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,38 +16,29 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class MainClient {
-<<<<<<< HEAD
-	private static final Logger LOG = Logger.getLogger(MainClient.class.getName());
+
+	private static final Logger logger = Logger.getLogger(MainClient.class.getName());
 	private static final int SERVER_PORT = 12345;
 	
 	
 	public static void runClient(String SERVER_HOST,String NICKNAME) throws ClientException{
-		Scanner sc = null;
+
 		Socket s = null;
 		
 		OutputStream out = null;
 		OutputStreamWriter osw = null;
 		BufferedWriter bw =null;
 		
+		logger.info("init Client");
 		
-		//PrintWriter pw = null;
-		
-		LOG.info("init Client");
-		
-		sc = new Scanner(System.in);
 		while(true){
 			try{
-								
-				final String msg = sc.nextLine();
 				
 				s = new Socket(InetAddress.getByName(SERVER_HOST), SERVER_PORT);
 				out = s.getOutputStream();
 				osw = new OutputStreamWriter(out, "UTF-8");
 				bw = new BufferedWriter(osw);
-				
-				bw.write(NICKNAME + " : "+ msg);
-				bw.flush();
-				
+			
 			} catch(IOException e){
 				throw new ClientException("Error during message sending");
 			} finally{
@@ -63,11 +59,7 @@ public class MainClient {
 		}
 		
 	}
-=======
->>>>>>> ga_cr
 	
-	public static final Logger logger = Logger.getLogger(MainClient.class.getName());
-
     private static FileHandler fileHandler = null;
     private static SimpleFormatter simpleFormatter = null;
     private static final String file = "./clientLogger.log";
@@ -95,25 +87,6 @@ public class MainClient {
 			e1.printStackTrace();
 		}
 
-<<<<<<< HEAD
-		
-		//Appel première fenêtre connexion
-		ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
-		connexionwindow.setVisible(true);
-		connexionwindow.setLocationRelativeTo(null);
-		
-//		  Window window = new Window();
-//		  window.setVisible(true);
-//		  window.setLocationRelativeTo(null);
-		
-//		try{
-//		MainClient.runClient();
-//		System.exit(0);
-//		}catch(ClientException e){
-//			LOG.error("Error in client management");
-//			
-//		}
-=======
 		try {
 			
 //			simpleFormatter = new SimpleFormatter();
@@ -129,14 +102,13 @@ public class MainClient {
 //        	logger.setLevel(java.util.logging.Level.FINEST);
         	
             //Appel premiÃ¨re fenÃªtre de connexion
-            ConnexionWindow window = new ConnexionWindow();
-    		window.setVisible(true);
-    		window.setLocationRelativeTo(null);
+            ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
+    		connexionwindow.setVisible(true);
+    		connexionwindow.setLocationRelativeTo(null);
     		logger.log(Level.INFO,"Window instanciated.");
 		
 		} catch (SecurityException e) {
 			logger.log(Level.SEVERE, "Security error in FileHandler :"+ e); 
 		}
->>>>>>> ga_cr
 	}
 }
