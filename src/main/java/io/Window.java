@@ -48,8 +48,9 @@ import controller.SendButtonListener;
  */
 public class Window extends javax.swing.JFrame {
 	
-    // Déclaration des variables               
-	private JTextPane chatTextArea;
+    // DÃ©claration des variables               
+	public JTextPane chatTextArea;
+	
     private JButton disconnectButton;
     private JTextPane inputTextArea;
     private JLabel usernameLabel;
@@ -66,16 +67,20 @@ public class Window extends javax.swing.JFrame {
     private JLabel usernameField;
     private JTextArea usersList;
 
-
+    // Â©LittleSnake42
     private static Window INSTANCE = new Window();
+    // Â©LittleSnake42
+    public static final String[] EMOS = {"lol_icon_chat","hungry_icon_chat","loudly_icon_chat", "monkey_icon_chat","poop_icon_chat","angry_icon_chat","penguin_icon_chat","panda_icon_chat"};
+
     
-    // Lancement de la fenêtre de chat et du choix pour le canal de discussion
+    // Lancement de la fenÃªtre de chat et du choix pour le canal de discussion
     private Window() {
         initComponents();
 //        chanelChat();
         
     }
-    
+
+    // Â©LittleSnake42
     public static Window getInstance() {
 		return INSTANCE;
 	}
@@ -128,7 +133,7 @@ public class Window extends javax.swing.JFrame {
 		}
 	}
 	
-    // Création de la fenêtre du chat
+    // CrÃ©ation de la fenÃªtre du chat
     private void initComponents() {
     	
     	final Object[] items =
@@ -161,7 +166,7 @@ public class Window extends javax.swing.JFrame {
        
 	    Toolkit kit = Toolkit.getDefaultToolkit();
 	       
-	    // Modifier l'icône de JFrame
+	    // Modifier l'icÃ´ne de JFrame
 	    Image img = kit.getImage("images/hungry_icon.png");
 	    setIconImage(img);
         
@@ -198,36 +203,44 @@ public class Window extends javax.swing.JFrame {
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineLabel.setText("Online Users");
         
-        //Ajout des smileys quand l'icône sélectionné pour le remettre après
+        //Ajout des smileys quand l'icÃ´ne sÃ©lectionnÃ© pour le remettre aprÃ¨s
         emoList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
+            	
+            	StyledDocument doc = getInputTextArea().getStyledDocument();
+            	
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 2) {
+					try {
 
-                	if(emoList.isSelectedIndex(0)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/lol_icon_chat.png"));
-                    	addSpace();
-                	}else if(emoList.isSelectedIndex(1)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/hungry_icon_chat.png"));	
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(2)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(3)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/monkey_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(4)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(5)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/angry_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(6)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/penguin_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(7)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/panda_icon_chat.png"));
-                    	addSpace();
+	                	if(emoList.isSelectedIndex(0)){
+							doc.insertString(doc.getLength(), "lol_icon_chat", null);		
+	                    	addSpace();
+	                	}else if(emoList.isSelectedIndex(1)){
+							doc.insertString(doc.getLength(), "hungry_icon_chat", null);		
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(2)){
+							doc.insertString(doc.getLength(), "loudly_icon_chat", null);		
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(3)){
+							doc.insertString(doc.getLength(), "monkey_icon_chat", null);
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(4)){
+							doc.insertString(doc.getLength(), "poop_icon_chat", null);
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(5)){
+							doc.insertString(doc.getLength(), "angry_icon_chat", null);
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(6)){
+							doc.insertString(doc.getLength(), "penguin_icon_chat", null);
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(7)){
+							doc.insertString(doc.getLength(), "panda_icon_chat", null);
+	                    	addSpace();
+						}
+					} catch (BadLocationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
                 }
             }
@@ -235,41 +248,49 @@ public class Window extends javax.swing.JFrame {
         
         
    
-        // Ajout des icônes dans la zone de saisie du texte dans un plus petit format
+        // Ajout des icÃ´nes dans la zone de saisie du texte dans un plus petit format
         emoList.addListSelectionListener(new ListSelectionListener() {	
-			public void valueChanged(ListSelectionEvent e) {				
+			public void valueChanged(ListSelectionEvent e) {			
+				
+            	StyledDocument doc = getInputTextArea().getStyledDocument();
+
+            	try {
                 if(e.getValueIsAdjusting()) {
                 	if(emoList.isSelectedIndex(0)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/lol_icon_chat.png"));
+						doc.insertString(doc.getLength(), "lol_icon_chat", null);		
                     	addSpace();
                 	}else if(emoList.isSelectedIndex(1)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/hungry_icon_chat.png"));	
+						doc.insertString(doc.getLength(), "hungry_icon_chat", null);		
                     	addSpace();
 					} else if(emoList.isSelectedIndex(2)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));
+						doc.insertString(doc.getLength(), "loudly_icon_chat", null);		
                     	addSpace();
 					} else if(emoList.isSelectedIndex(3)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/monkey_icon_chat.png"));
+						doc.insertString(doc.getLength(), "monkey_icon_chat", null);
                     	addSpace();
 					} else if(emoList.isSelectedIndex(4)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));
+						doc.insertString(doc.getLength(), "poop_icon_chat", null);
                     	addSpace();
 					} else if(emoList.isSelectedIndex(5)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/angry_icon_chat.png"));
+						doc.insertString(doc.getLength(), "angry_icon_chat", null);
                     	addSpace();
 					} else if(emoList.isSelectedIndex(6)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/penguin_icon_chat.png"));
+						doc.insertString(doc.getLength(), "penguin_icon_chat", null);
                     	addSpace();
 					} else if(emoList.isSelectedIndex(7)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/panda_icon_chat.png"));
+						doc.insertString(doc.getLength(), "panda_icon_chat", null);
                     	addSpace();
-					}
+					}}}
+                 catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 }
             }
-        });
+        );
         
         
-        // Création de la fenêtre de chat et des composants
+        // CrÃ©ation de la fenÃªtre de chat et des composants
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
