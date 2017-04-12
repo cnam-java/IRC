@@ -36,7 +36,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
-import controller.ChannelButtonListener;
+//import controller.ChannelButtonListener;
 import controller.ConnectionButtonListener;
 import controller.DeconnexionButtonListener;
 import controller.SendButtonListener;
@@ -60,6 +60,7 @@ public class Window extends javax.swing.JFrame {
     
     private JLabel channelLabel;
     private JLabel channelField;
+    private JButton channelButton;
 
 	private JButton sendButton;
     private JLabel usernameField;
@@ -71,7 +72,7 @@ public class Window extends javax.swing.JFrame {
     // Lancement de la fenêtre de chat et du choix pour le canal de discussion
     private Window() {
         initComponents();
-        chanelChat();
+//        chanelChat();
         
     }
     
@@ -91,9 +92,12 @@ public class Window extends javax.swing.JFrame {
     private void chanelChat() {  	
     	  String[] options = {"OK"};
 		  JPanel panel = new JPanel();
+		  JButton button = new JButton();
+		  button.setText("guigui");
 		  JLabel lbl = new JLabel("Enter a channel to join or to create : ");
 		  JTextField txt = new JTextField(10);
 		  panel.add(lbl);
+		  panel.add(button);
 		  panel.add(txt);
 		  int selectedOption = JOptionPane.showOptionDialog(null, panel, "CHANNEL", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 			
@@ -148,6 +152,7 @@ public class Window extends javax.swing.JFrame {
         usernameField = new JLabel();
         channelLabel = new JLabel();
         channelField = new JLabel();
+        channelButton = new JButton();
         disconnectButton = new JButton();
         sendButton = new JButton();
         usersListPanel = new JScrollPane();
@@ -187,6 +192,8 @@ public class Window extends javax.swing.JFrame {
         inputTextArea.addKeyListener(new SendButtonListener());
         disconnectButton.addActionListener(new DeconnexionButtonListener());
         disconnectButton.setText("Deconnexion");
+        
+        channelButton.setText("Change channel");
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineLabel.setText("Online Users");
@@ -283,6 +290,8 @@ public class Window extends javax.swing.JFrame {
             				    .addComponent(channelLabel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
                 				.addPreferredGap(ComponentPlacement.UNRELATED)
                 			.addComponent(channelField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+                			.addPreferredGap(ComponentPlacement.RELATED)
+            				.addComponent(channelButton)
             				.addPreferredGap(ComponentPlacement.RELATED)
             				.addComponent(disconnectButton))
             				.addComponent(inputMessage, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE))
@@ -297,6 +306,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(channelButton)                		
                     .addComponent(disconnectButton)
                     .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(usernameLabel, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)

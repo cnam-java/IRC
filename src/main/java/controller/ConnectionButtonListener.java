@@ -1,10 +1,12 @@
 package controller;
 
+import io.ChannelConnexion;
 import io.ClientException;
 import io.ConnexionWindow;
 import io.MainClient;
 import io.Window;
-import json.Message;
+//import json.Message;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,14 +64,13 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	  	  else{
 	      	 
 	  		//try{
-
-	  		  	Message mess = new Message();
-	  		  	mess.connectMessage(connexionwindow.getUsername(),connexionwindow.getIpField());
-	  			Window window = Window.getInstance();
-	  			connexionwindow.dispose();
-	  	      	window.setVisible(true);
-	  	  		window.setLocationRelativeTo(null);
-	  	  		window.setUsernameField(connexionwindow.getUsername());
+//
+//	  		  	Message mess = new Message();
+//	  		  	mess.connectMessage(connexionwindow.getUsername(),connexionwindow.getIpField());
+	  	        ChannelConnexion channel = ChannelConnexion.getInstance();
+	  	        connexionwindow.dispose();
+	  	        channel.setVisible(true);
+	  	        channel.setLocationRelativeTo(null);
 	  			//MainClient.runClient(SERVER_HOST, NICKNAME);
 //	  			}catch(ClientException e){
 //	  				JOptionPane.showMessageDialog(null, "Erreur de connexion avec le server", "Information", JOptionPane.INFORMATION_MESSAGE); 

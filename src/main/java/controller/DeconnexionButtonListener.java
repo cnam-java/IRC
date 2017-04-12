@@ -2,7 +2,7 @@ package controller;
 
 import io.ConnexionWindow;
 import io.Window;
-import json.Message;
+//import json.Message;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,11 +29,11 @@ public class DeconnexionButtonListener implements ActionListener  {
     
     public void sendDisconnect() {
     	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
-    	Message mess = new Message();
-    	String disconnectMess = mess.exitMessage();
+//    	Message mess = new Message();
+//    	String disconnectMess = mess.exitMessage();
         String bye = (connexionwindow.getUsername() + ": :Déconnecté");
          try{
-             writer.write(disconnectMess); // Sends server the disconnect signal.
+//             writer.write(disconnectMess); // Sends server the disconnect signal.
              writer.flush(); // flushes the buffer
          } catch (Exception e) {
              chatTextArea.append("Impossible d'envoyer le message déconnecté.\n");
