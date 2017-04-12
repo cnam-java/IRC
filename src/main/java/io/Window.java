@@ -49,7 +49,8 @@ import controller.SendButtonListener;
 public class Window extends javax.swing.JFrame {
 	
     // Déclaration des variables               
-	private JTextPane chatTextArea;
+	public JTextPane chatTextArea;
+	
     private JButton disconnectButton;
     private JTextPane inputTextArea;
     private JLabel usernameLabel;
@@ -65,8 +66,11 @@ public class Window extends javax.swing.JFrame {
     private JLabel usernameField;
     private JTextArea usersList;
 
-
+    // ©LittleSnake42
     private static Window INSTANCE = new Window();
+    // ©LittleSnake42
+    public static final String[] EMOS = {"monkey_icon"};
+
     
     // Lancement de la fenêtre de chat et du choix pour le canal de discussion
     private Window() {
@@ -74,7 +78,8 @@ public class Window extends javax.swing.JFrame {
         chanelChat();
         
     }
-    
+
+    // ©LittleSnake42
     public static Window getInstance() {
 		return INSTANCE;
 	}
@@ -194,33 +199,40 @@ public class Window extends javax.swing.JFrame {
         //Ajout des smileys quand l'icône sélectionné pour le remettre après
         emoList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
+            	
+            	StyledDocument doc = getChatTextArea().getStyledDocument();
+            	
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 2) {
+					try {
 
-                	if(emoList.isSelectedIndex(0)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/lol_icon_chat.png"));
-                    	addSpace();
-                	}else if(emoList.isSelectedIndex(1)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/hungry_icon_chat.png"));	
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(2)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(3)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/monkey_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(4)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(5)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/angry_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(6)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/penguin_icon_chat.png"));
-                    	addSpace();
-					} else if(emoList.isSelectedIndex(7)){
-                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/panda_icon_chat.png"));
-                    	addSpace();
+	                	if(emoList.isSelectedIndex(0)){
+	                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/lol_icon_chat.png"));
+	                    	addSpace();
+	                	}else if(emoList.isSelectedIndex(1)){
+	                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/hungry_icon_chat.png"));	
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(2)){
+	                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/loudly_icon_chat.png"));
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(3)){
+							doc.insertString(doc.getLength(), "monkey_icon", null);		
+						} else if(emoList.isSelectedIndex(4)){
+	                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/poop_icon_chat.png"));
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(5)){
+	                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/angry_icon_chat.png"));
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(6)){
+	                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/penguin_icon_chat.png"));
+	                    	addSpace();
+						} else if(emoList.isSelectedIndex(7)){
+	                    	inputTextArea.insertIcon((Icon) new ImageIcon("images/panda_icon_chat.png"));
+	                    	addSpace();
+						}
+					} catch (BadLocationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
                 }
             }
