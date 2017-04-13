@@ -67,20 +67,18 @@ public class Window extends javax.swing.JFrame {
     private JLabel usernameField;
     private JTextArea usersList;
 
-    // Â©LittleSnake42
+
     private static Window INSTANCE = new Window();
-    // Â©LittleSnake42
     public static final String[] EMOS = {"lol_icon_chat","hungry_icon_chat","loudly_icon_chat", "monkey_icon_chat","poop_icon_chat","angry_icon_chat","penguin_icon_chat","panda_icon_chat"};
 
     
-    // Lancement de la fenÃªtre de chat et du choix pour le canal de discussion
+    // Lancement de la fenêtre de chat et du choix pour le canal de discussion
     private Window() {
+    	
         initComponents();
-//        chanelChat();
         
     }
 
-    // Â©LittleSnake42
     public static Window getInstance() {
 		return INSTANCE;
 	}
@@ -93,27 +91,6 @@ public class Window extends javax.swing.JFrame {
     	return this.inputTextArea.getText();
     }
 
-    // Message de choix du canal de discussion
-    private void chanelChat() {  	
-    	  String[] options = {"OK"};
-		  JPanel panel = new JPanel();
-		  JButton button = new JButton();
-		  button.setText("guigui");
-		  JLabel lbl = new JLabel("Enter a channel to join or to create : ");
-		  JTextField txt = new JTextField(10);
-		  panel.add(lbl);
-		  panel.add(button);
-		  panel.add(txt);
-		  int selectedOption = JOptionPane.showOptionDialog(null, panel, "CHANNEL", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
-			
-		  if(txt.getText().isEmpty() && selectedOption == 0){
-				chanelChat();
-			} else if (selectedOption != 0){
-				System.exit(0);
-			}
-		  setChanelField(txt.getText());
-	}
-	
     public void setUsernameField(String username) {
 		this.usernameField.setText(username);
 	}

@@ -17,8 +17,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import controller.ConnectionButtonListener;
-import controller.SendButtonListener;
-//import json.Message;
 
 public class ConnexionWindow extends JFrame{
 	

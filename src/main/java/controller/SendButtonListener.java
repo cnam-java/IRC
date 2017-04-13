@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedWriter;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -24,8 +23,6 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 	{
 	     if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	     {
-	    	 // Recopier la meme methode que le action ??
-	    	 //System.out.println("entrée");
 	    	 Send();
 	    	 
 	     }
@@ -34,12 +31,8 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 		// TODO Auto-generated method stub
 	     if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	     {
-	    	 // Recopier la meme methode que le action ??
-	    	 //System.out.println("entrée");
-	    	 	Window window = Window.getInstance();
-	            window.getInputTextArea().setText(null);
-
-	    	 
+    	 	Window window = Window.getInstance();
+            window.getInputTextArea().setText(null); 
 	     }
 		
 	}
@@ -51,8 +44,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
     	Window window = Window.getInstance();
     	
 		final StyledDocument doc = window.getChatTextArea().getStyledDocument();
-
-		//©LittleSnake42	
+	
 		String msg = window.getInputTextArea().getText();
 		
 		// Split the string and check each word
@@ -92,7 +84,6 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 					e1.printStackTrace();
 				}
 		}
-		// END ©LittleSnake
 //    	try {
 //		    doc.insertString(doc.getLength(), window.getUsernameField() + " : " + window.getInputTextArea().getText()+"\n", null );
 //

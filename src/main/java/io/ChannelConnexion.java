@@ -19,7 +19,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import controller.ChannelButtonListener;
 import controller.ConnectionButtonListener;
 import controller.SendButtonListener;
-//import json.Message;
 
 public class ChannelConnexion extends JFrame{
 	

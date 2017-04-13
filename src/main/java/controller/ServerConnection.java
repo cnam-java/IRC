@@ -43,7 +43,7 @@ public class ServerConnection {
 		CustomLogger logger = new CustomLogger();
 		
 		if(this.isStarted){
-			logger.log(Level.WARNING, "ServerConnexion", "startConnexion", "Error in starting server connexion.");	
+			logger.log(Level.WARNING, "ServerConnexion", "startConnexion", "Error in starting server connexion : already connected to another server.");	
 		}
 		
 		try{
@@ -60,6 +60,7 @@ public class ServerConnection {
 			this.br = new BufferedReader(new InputStreamReader(in));
 			
 			this.isStarted = true;
+			logger.log(Level.INFO, "ServerConnection", "startConnection", "Success in connecting to server!"); 
 		
 		} catch(IOException e){
 			logger.log(Level.SEVERE, "ServerConnection", "startConnection", "IOException when starting connection : "+e);
@@ -92,7 +93,9 @@ public class ServerConnection {
 			if(this.s != null){
 				this.s.close();
 			}
+			
 			this.isStarted = false;
+			logger.log(Level.INFO, "ServerConnection", "closeConnection", "Connection with server closed !"); 
 			
 		} catch(IOException e) {
 			logger.log(Level.SEVERE, "ServerConnection", "closeConnection", "IOException when closing connection:"+e);
@@ -123,7 +126,7 @@ public class ServerConnection {
 				logger.log(Level.SEVERE, "ServerConnection", "write", "IOException when writing : "+e); 
 			}
 		} else {
-			logger.log(Level.WARNING, "ServerConnection", "write", "No connection to server"); 
+			logger.log(Level.SEVERE, "ServerConnection", "write", "No connection to server"); 
 		}
 	}
 	
@@ -136,6 +139,8 @@ public class ServerConnection {
 			try{
 				
 				message = this.br.readLine();
+				
+				logger.log(Level.INFO, "ServerConnection", "read", "New message read : "+message);
 
 			} catch (IOException e) {
 				this.closeConnection();
@@ -147,7 +152,7 @@ public class ServerConnection {
 			}
 
 		} else {
-			logger.log(Level.WARNING, "ServerConnection", "write", "No connection to server"); 
+			logger.log(Level.SEVERE, "ServerConnection", "write", "No connection to server"); 
 		}
 		
 		return message;

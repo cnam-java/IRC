@@ -1,17 +1,15 @@
 package controller;
 
 import io.ConnexionWindow;
+import io.CustomLogger;
 import io.Window;
 import json.Message;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
+import java.util.logging.Level;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 
 public class DeconnexionButtonListener implements ActionListener  { 
 	
@@ -19,16 +17,21 @@ public class DeconnexionButtonListener implements ActionListener  {
 	
     public void actionPerformed(ActionEvent evt) {                                                 
         
+    	CustomLogger logger = new CustomLogger();
+    	
         sendDisconnect();
+        Disconnect();
         Window window = Window.getInstance();
     	window.dispose();
     	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
     	connexionwindow.setVisible(true);
     	connexionwindow.setLocationRelativeTo(null);
-        Disconnect();
+    	
+        logger.log(Level.INFO, "DeconnexionButtonListener", "actionPerformed", "User disconnected from server.");
     }
     
     public void sendDisconnect() {
+    	
     	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
     	Message mess = new Message();
     	String disconnectMess = mess.exitMessage();

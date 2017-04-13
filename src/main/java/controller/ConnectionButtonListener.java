@@ -1,11 +1,8 @@
 package controller;
 
-//import io.ChannelConnexion;
-import io.ClientException;
+import io.ChannelConnexion;
 import io.ConnexionWindow;
 import io.CustomLogger;
-import io.MainClient;
-import io.Window;
 import json.Message;
 
 
@@ -13,11 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
@@ -25,7 +17,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class ConnectionButtonListener implements ActionListener, KeyListener{ 
-	    BufferedWriter writer;
+
 	    ArrayList<String> userList = new ArrayList();
 	    Boolean isConnected = false;
 	    private static final Pattern PATTERN = Pattern.compile(
@@ -73,13 +65,18 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	  	  else if(!validate(ipString)){
 	  		JOptionPane.showMessageDialog(null, "Entrez une adresse ip valide", "Information", JOptionPane.INFORMATION_MESSAGE);
 	  	  } else{
-
+	  		
+	  		String user = connexionwindow.getUsername();
+	  		String ipServer = connexionwindow.getIpField();
+	  		ServerConnection server = ServerConnection.getInstance();
+	  		server.openConnection(ipServer); 
 	  		Message mess = new Message();
-	  		mess.connectMessage(connexionwindow.getUsername(),connexionwindow.getIpField());
-  	        //ChannelConnexion channel = ChannelConnexion.getInstance();
+	  		mess.connectMessage(user, ipServer);
+  	        ChannelConnexion channel = ChannelConnexion.getInstance();
   	        connexionwindow.dispose();
-  	        //channel.setVisible(true);
-  	        //channel.setLocationRelativeTo(null);
+  	        channel.setVisible(true);
+  	        channel.setLocationRelativeTo(null);
+  	        logger.log(Level.INFO, "ConnectionButtonListener", "Connect", user.toUpperCase()+" connected to server with ip "+ipServer);
   	  		logger.log(Level.INFO, "ConnectionButtonListener", "Connect", "ChatWindow instanciated and launched");
 	  	  }
 		
