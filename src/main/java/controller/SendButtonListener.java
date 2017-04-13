@@ -26,7 +26,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 	     if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	     {
 	    	 // Recopier la meme methode que le action ??
-	    	 //System.out.println("entr��");
+	    	 //System.out.println("entrée");
 	    	 Send();
 	    	 
 	     }
@@ -36,7 +36,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 	     if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	     {
 	    	 // Recopier la meme methode que le action ??
-	    	 //System.out.println("entr��");
+	    	 //System.out.println("entrée");
 	    	 	Window window = Window.getInstance();
 	            window.getInputTextArea().setText(null);
 
@@ -73,10 +73,12 @@ public class SendButtonListener implements ActionListener, KeyListener  {
         	window.getInputTextArea().requestFocus();
         } else {
             try {
+            	
             	Message mess = new Message();
             	String textMess = mess.textMessage(connexionwindow.getUsername(), window.getMessage());
-            	writer.write(textMess); 
-            	writer.flush(); // flushes the buffer
+            	ServerConnection server = ServerConnection.getInstance();
+            	server.write(textMess);
+            	
             } catch (Exception ex) {
             	writeArea();
             }

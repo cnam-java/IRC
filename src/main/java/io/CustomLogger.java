@@ -8,39 +8,38 @@ import java.util.logging.SimpleFormatter;
 
 public class CustomLogger{
 	
-    private static Logger logger;
+    private static Logger logger = Logger.getLogger(CustomLogger.class.getName());
     private static FileHandler fileHandler = null;
     private static SimpleFormatter simpleFormatter = null;
     private static final String file = "./clientLogger.log";
+   
     
-    private static CustomLogger INSTANCE = new CustomLogger();
-
-    public static CustomLogger getInstance(){
-		return INSTANCE;
-    }
-    
-    
-    public void setName(String name){
-    	logger = Logger.getLogger(name);
-    }
-     
-    public void log(Level level, String message){
+    public CustomLogger(){
     	
+    }
+    
+    public void initLogger(){
+
         try {
-        	//if( fileHandler == null){
         		simpleFormatter = new SimpleFormatter();
-				fileHandler = new FileHandler(file, 0, 1, false);
+				fileHandler = new FileHandler(file, true);
             	fileHandler.setFormatter(simpleFormatter);
             	logger.addHandler(fileHandler);
-        	//}
-            logger.setUseParentHandlers(false);
-            logger.setLevel(java.util.logging.Level.FINEST);
-            logger.log(level, message);      
-            
-		} catch (SecurityException e) {
-			//logger.log(java.util.logging.Level.SEVERE, "Security Exception for logger : "+e);
-		} catch (IOException e) {
-			//logger.log(java.util.logging.Level.SEVERE,"IOException for logger : "+e);
-		}
+            	logger.setUseParentHandlers(false);
+            	logger.setLevel(java.util.logging.Level.FINEST);
+
+    		} catch (SecurityException e) {
+    			logger.log(java.util.logging.Level.SEVERE, "Security Exception for logger : "+e);
+    		} catch (IOException e) {
+    			logger.log(java.util.logging.Level.SEVERE,"IOException for logger : "+e);
+    		}
+        
+    }
+
+    
+    public void log(Level level, String className, String method, String message){
+  	
+        logger.logp(level, className, method, message);
+        
     }  
 }

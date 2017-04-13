@@ -2,6 +2,7 @@ package controller;
 
 import io.ClientException;
 import io.ConnexionWindow;
+import io.CustomLogger;
 import io.MainClient;
 import io.Window;
 import json.Message;
@@ -16,6 +17,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
@@ -23,6 +26,9 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	    BufferedWriter writer;
 	    ArrayList<String> userList = new ArrayList();
 	    Boolean isConnected = false;
+	    private static final Pattern PATTERN = Pattern.compile(
+	            "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
+
 
     public void actionPerformed(ActionEvent evt) {
     	Connect();
@@ -48,8 +54,11 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	}
 	
 	public void Connect(){
-		
+	
 		ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
+		String ipString = connexionwindow.getIpField();
+		CustomLogger logger = new CustomLogger();
+		
 	  	   if(connexionwindow.getUsername().isEmpty() && connexionwindow.getIpField().isEmpty()){
 	  		  JOptionPane.showMessageDialog(null, "Choissisez un nom d'utilisateur et entrez une adresse ip", "Information", JOptionPane.INFORMATION_MESSAGE);
 	  	  }
@@ -59,24 +68,25 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	  	  else if(connexionwindow.getIpField().isEmpty()){
 	  		  JOptionPane.showMessageDialog(null, "Entrez une adresse ip", "Information", JOptionPane.INFORMATION_MESSAGE); 	 
 	  	  }
-	  	  else{
-	      	 
-	  		//try{
+	  	  else if(!validate(ipString)){
+	  		JOptionPane.showMessageDialog(null, "Entrez une adresse ip valide", "Information", JOptionPane.INFORMATION_MESSAGE);
+	  	  } else{
 
-	  		  	Message mess = new Message();
-	  		  	mess.connectMessage(connexionwindow.getUsername(),connexionwindow.getIpField());
-	  			Window window = Window.getInstance();
-	  			connexionwindow.dispose();
-	  	      	window.setVisible(true);
-	  	  		window.setLocationRelativeTo(null);
-	  	  		window.setUsernameField(connexionwindow.getUsername());
-	  			//MainClient.runClient(SERVER_HOST, NICKNAME);
-//	  			}catch(ClientException e){
-//	  				JOptionPane.showMessageDialog(null, "Erreur de connexion avec le server", "Information", JOptionPane.INFORMATION_MESSAGE); 
-//	  				
-//	  		}
+  		  	Message mess = new Message();
+  		  	mess.connectMessage(connexionwindow.getUsername(),connexionwindow.getIpField());
+  			Window window = Window.getInstance();
+  			connexionwindow.dispose();
+  	      	window.setVisible(true);
+  	  		window.setLocationRelativeTo(null);
+  	  		window.setUsernameField(connexionwindow.getUsername());
+  	  		logger.log(Level.INFO, "ConnectionButtonListener", "Connect", "ChatWindow instanciated and launched");
 	  	  }
 		
 	}
+	
+    public static boolean validate(final String ip) {
+        return PATTERN.matcher(ip).matches();
+    }
+
 
 }

@@ -14,10 +14,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 public class DeconnexionButtonListener implements ActionListener  { 
+	
 	private JTextArea chatTextArea;
-	private BufferedWriter writer;
+	
     public void actionPerformed(ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+        
         sendDisconnect();
         Window window = Window.getInstance();
     	window.dispose();
@@ -33,8 +34,11 @@ public class DeconnexionButtonListener implements ActionListener  {
     	String disconnectMess = mess.exitMessage();
         String bye = (connexionwindow.getUsername() + ": :Déconnecté");
          try{
-             writer.write(disconnectMess); // Sends server the disconnect signal.
-             writer.flush(); // flushes the buffer
+        	 
+        	 chatTextArea.append(bye);
+             ServerConnection server = ServerConnection.getInstance();
+             server.write(disconnectMess); 
+             
          } catch (Exception e) {
              chatTextArea.append("Impossible d'envoyer le message déconnecté.\n");
          }
@@ -44,8 +48,10 @@ public class DeconnexionButtonListener implements ActionListener  {
      public void Disconnect() {
 
          try {
-                 chatTextArea.append("Déconnecter.\n");
-                //sock.close();
+                //chatTextArea.append("Déconnecter.\n");
+                ServerConnection server = ServerConnection.getInstance();
+                server.closeConnection(); 
+                
          } catch(Exception ex) {
                 chatTextArea.append("Echec de la déconnexion. \n");
          }
