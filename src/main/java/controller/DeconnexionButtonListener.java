@@ -34,7 +34,7 @@ public class DeconnexionButtonListener implements ActionListener  {
     	String disconnectMess = mess.exitMessage();
         String bye = (connexionwindow.getUsername() + ": :Déconnecté");
          try{
-        	 
+
         	 chatTextArea.append(bye);
              ServerConnection server = ServerConnection.getInstance();
              server.write(disconnectMess); 
