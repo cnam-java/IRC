@@ -67,7 +67,7 @@ public class ChannelButtonListener implements ActionListener, KeyListener{
 				window.setChanelField(channel);
 				window.setUsernameField(user);
 				logger.log(Level.INFO, "ChannelButtonListener", "Connect", user.toUpperCase()+" has joined channel "+channel.toUpperCase());
-			
+				logger.log(Level.INFO, "ChannelButtonListener", "Connect", "Window instantiated and launched");
 	  	  }
 		
 	}

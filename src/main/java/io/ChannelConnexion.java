@@ -38,9 +38,13 @@ public class ChannelConnexion extends JFrame{
 		return INSTANCE;
 	}
     
-    // Récupération du nom d'utilisateur
+    // Récupération du nom du cannal
     public String getChannel(){   
         return channelField.getText();
+    }
+    
+    public void setChannelFiel(){
+    	channelField.setText(""); 
     }
 
     // Initialisation de la fenêtre de connexion

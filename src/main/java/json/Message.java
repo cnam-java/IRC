@@ -22,6 +22,7 @@ public class Message {
 
 		JSONArray args = new JSONArray();		
 		args.put(serverIp);
+		args.put(nickname);
 		
 		JSONObject jsonConnect = new JSONObject();
 		jsonConnect.put("args", args);
@@ -59,11 +60,12 @@ public class Message {
 		return message;
 	}
 	
-	public String quitMessage() {
+	public String quitMessage(String nickname) {
 		
 		CustomLogger logger = new CustomLogger();
 		JSONObject jsonQuit = new JSONObject();
 		
+		jsonQuit.put("nickname", nickname); 
 		jsonQuit.put("post", "#QUIT");
 		
 		String message = jsonQuit.toString();
@@ -71,14 +73,15 @@ public class Message {
 		return message;
 	}
 
-	public String exitMessage() {
+	public String exitMessage(String nickname) {
 		
 		CustomLogger logger = new CustomLogger();
-		JSONObject jsonQuit = new JSONObject();
+		JSONObject jsonExit = new JSONObject();
 		
-		jsonQuit.put("post", "#EXIT");
+		jsonExit.put("nickname", nickname);
+		jsonExit.put("post", "#EXIT");
 		
-		String message = jsonQuit.toString();
+		String message = jsonExit.toString();
 		logger.log(Level.INFO, "Message", "exitMessage", "New exit message created :"+message);
 		return message;
 	}

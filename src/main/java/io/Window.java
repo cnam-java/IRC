@@ -36,6 +36,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import controller.ChangeChannelButtonListener;
 //import controller.ChannelButtonListener;
 import controller.ConnectionButtonListener;
 import controller.DeconnexionButtonListener;
@@ -172,10 +173,12 @@ public class Window extends javax.swing.JFrame {
         sendButton.addActionListener(new SendButtonListener());
         sendButton.addKeyListener(new SendButtonListener());
         inputTextArea.addKeyListener(new SendButtonListener());
+        
         disconnectButton.addActionListener(new DeconnexionButtonListener());
         disconnectButton.setText("Deconnexion");
         
         channelButton.setText("Change channel");
+        channelButton.addActionListener(new ChangeChannelButtonListener()); 
 
         onlineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineLabel.setText("Online Users");

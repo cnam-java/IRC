@@ -17,8 +17,6 @@ public class DeconnexionButtonListener implements ActionListener  {
 	
     public void actionPerformed(ActionEvent evt) {                                                 
         
-    	CustomLogger logger = new CustomLogger();
-    	
         sendDisconnect();
         Disconnect();
         Window window = Window.getInstance();
@@ -26,22 +24,26 @@ public class DeconnexionButtonListener implements ActionListener  {
     	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
     	connexionwindow.setVisible(true);
     	connexionwindow.setLocationRelativeTo(null);
+    	connexionwindow.setUsername();
+    	connexionwindow.setIpField(); 
     	
-        logger.log(Level.INFO, "DeconnexionButtonListener", "actionPerformed", "User disconnected from server.");
     }
     
     public void sendDisconnect() {
+
+    	CustomLogger logger = new CustomLogger();
     	
     	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
+    	String nickname = connexionwindow.getUsername();
     	Message mess = new Message();
-    	String disconnectMess = mess.exitMessage();
-        String bye = (connexionwindow.getUsername() + ": :Déconnecté");
-         try{
+    	String disconnectMess = mess.exitMessage(nickname);
+        try{
 
-        	 chatTextArea.append(bye);
-             ServerConnection server = ServerConnection.getInstance();
-             server.write(disconnectMess); 
-             
+            ServerConnection server = ServerConnection.getInstance();
+            server.write(disconnectMess); 
+
+            logger.log(Level.INFO, "DeconnexionButtonListener", "actionPerformed", nickname.toUpperCase()+" disconnected from server.");
+            
          } catch (Exception e) {
              chatTextArea.append("Impossible d'envoyer le message déconnecté.\n");
          }

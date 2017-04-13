@@ -11,6 +11,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 
+import org.json.JSONObject;
+
 import io.ConnexionWindow;
 import io.CustomLogger;
 import io.Window;
@@ -139,7 +141,7 @@ public class ServerConnection {
 			try{
 				
 				message = this.br.readLine();
-				
+
 				logger.log(Level.INFO, "ServerConnection", "read", "New message read : "+message);
 
 			} catch (IOException e) {
@@ -149,10 +151,12 @@ public class ServerConnection {
 	            ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
 	    		connexionwindow.setVisible(true);
 	    		connexionwindow.setLocationRelativeTo(null);
+	    		logger.log(Level.SEVERE, "ServerConnection", "read", "IOException when writing : "+e);
 			}
 
 		} else {
-			logger.log(Level.SEVERE, "ServerConnection", "write", "No connection to server"); 
+			
+			logger.log(Level.SEVERE, "ServerConnection", "read", "No connection to server"); 
 		}
 		
 		return message;

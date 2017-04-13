@@ -48,6 +48,14 @@ public class ConnexionWindow extends JFrame{
         return ipField.getText();
     }
 
+    public void setUsername(){
+    	usernameField.setText("");
+    }
+    
+    public void setIpField() {
+    	ipField.setText(""); 
+    } 
+    
     // Initialisation de la fenêtre de connexion
     private void initConnexion() {
     	

@@ -77,7 +77,7 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
   	        channel.setVisible(true);
   	        channel.setLocationRelativeTo(null);
   	        logger.log(Level.INFO, "ConnectionButtonListener", "Connect", user.toUpperCase()+" connected to server with ip "+ipServer);
-  	  		logger.log(Level.INFO, "ConnectionButtonListener", "Connect", "ChatWindow instanciated and launched");
+  	  		logger.log(Level.INFO, "ConnectionButtonListener", "Connect", "ChannelWindow instantiated and launched");
 	  	  }
 		
 	}
