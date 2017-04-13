@@ -1,5 +1,8 @@
 package controller;
 
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
+
 import io.Window;
 
 public class ServerListener extends Thread {
@@ -11,8 +14,13 @@ public class ServerListener extends Thread {
 			String response = server.read();
 			if(response != null){
 			Window window = Window.getInstance();
-			window.getChatTextArea().setText(response+"\n");
-			window.getChatTextArea().setText("weshhh\n");
+			final StyledDocument doc = window.getChatTextArea().getStyledDocument();
+			try {
+				doc.insertString(doc.getLength(),response+"\n", null);
+			} catch (BadLocationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println(response);
 			}
 		}
