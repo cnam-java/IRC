@@ -135,7 +135,7 @@ public class ServerConnection {
 	public String read(){
 		
 		CustomLogger logger = new CustomLogger();
-		String message = "";
+		String message = null;
 		
 		if(this.isStarted){
 			try{
@@ -155,10 +155,10 @@ public class ServerConnection {
 			}
 
 		} else {
-			
+			Window window = Window.getInstance();
+			window.getChatTextArea().setText("Pas de connexion\n");
 			logger.log(Level.SEVERE, "ServerConnection", "read", "No connection to server"); 
 		}
-		
 		return message;
 	}
 

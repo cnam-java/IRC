@@ -109,7 +109,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
             	String textMess = mess.textMessage(connexionwindow.getUsername(), window.getMessage());
             	ServerConnection server = ServerConnection.getInstance();
             	server.write(textMess);
-            	server.read();
+            	//server.read();
             	
             } catch (Exception ex) {
             	writeArea();

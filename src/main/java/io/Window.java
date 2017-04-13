@@ -84,21 +84,6 @@ public class Window extends javax.swing.JFrame {
 		return INSTANCE;
 	}
 
-    public String getChannel(){
-    	return this.channelField.getText();
-    }
-    
-    public String getMessage(){
-    	return this.inputTextArea.getText();
-    }
-
-    public void setUsernameField(String username) {
-		this.usernameField.setText(username);
-	}
-    
-    public void setChanelField(String chanel) {
-		this.channelField.setText(chanel);
-	}
     
     public void addSpace() {
 		final StyledDocument doc = inputTextArea.getStyledDocument();
@@ -332,6 +317,22 @@ public class Window extends javax.swing.JFrame {
         pack();
          
     }
+    
+    public String getChannel(){
+    	return this.channelField.getText();
+    }
+    
+    public String getMessage(){
+    	return this.inputTextArea.getText();
+    }
+    
+    public void setUsernameField(String username) {
+		this.usernameField.setText(username);
+	}
+    
+    public void setChanelField(String chanel) {
+		this.channelField.setText(chanel);
+	}
     
     public JTextPane getChatTextArea() {
 		return chatTextArea;
