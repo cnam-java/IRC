@@ -7,6 +7,8 @@ import io.Window;
 import json.Message;
 
 
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -67,6 +69,7 @@ public class ChannelButtonListener implements ActionListener, KeyListener{
 				window.setLocationRelativeTo(null);
 				window.setChanelField(channel);
 				window.setUsernameField(user);
+				new ServerListener().start();
 				logger.log(Level.INFO, "ChannelButtonListener", "Connect", user.toUpperCase()+" has joined channel "+channel.toUpperCase());
 				logger.log(Level.INFO, "ChannelButtonListener", "Connect", "Window instantiated and launched");
 	  	  }
