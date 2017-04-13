@@ -36,7 +36,7 @@ public class ServerConnection {
 		return INSTANCE;
 	}
 	
-	private ServerConnection() {
+	public ServerConnection() {
 		
 	}
 	
@@ -62,7 +62,7 @@ public class ServerConnection {
 			this.br = new BufferedReader(new InputStreamReader(in));
 			
 			this.isStarted = true;
-			logger.log(Level.INFO, "ServerConnection", "startConnection", "Success in connecting to server!"); 
+			logger.log(Level.INFO, "ServerConnection", "startConnection", "Success in opening socket to server!"); 
 		
 		} catch(IOException e){
 			logger.log(Level.SEVERE, "ServerConnection", "startConnection", "IOException when starting connection : "+e);
@@ -112,9 +112,9 @@ public class ServerConnection {
 		if(this.isStarted){
 			try{
 				
-				this.bw.write(message); 
-				this.bw.newLine();
-				this.bw.flush();
+				bw.write(message); 
+				bw.newLine();
+				bw.flush();
 				
 				logger.log(Level.INFO, "ServerConnection", "write", "New message sent : "+message); 
 				

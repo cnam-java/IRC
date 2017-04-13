@@ -71,7 +71,7 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	  		ServerConnection server = ServerConnection.getInstance();
 	  		server.openConnection(ipServer); 
 	  		Message mess = new Message();
-	  		mess.connectMessage(user, ipServer);
+	  		server.write(mess.connectMessage(user, ipServer));
   	        ChannelConnexion channel = ChannelConnexion.getInstance();
   	        connexionwindow.dispose();
   	        channel.setVisible(true);

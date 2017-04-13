@@ -39,7 +39,7 @@ public class MainClient {
             ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
     		connexionwindow.setVisible(true);
     		connexionwindow.setLocationRelativeTo(null);
-    		logger.log(Level.INFO,"MainClient","main","ConnexionWindow instanciated and launched.");
+    		logger.log(Level.INFO,"MainClient","main","ConnexionWindow instantiated and launched.");
     		
 	}
 }
