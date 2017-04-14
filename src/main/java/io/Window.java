@@ -137,14 +137,6 @@ public class Window extends javax.swing.JFrame {
         
         emoList.setVisibleRowCount(1);
         emoList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        Window window = Window.getInstance();
-        window.addWindowListener(new WindowAdapter(){
-            public void windowClosing()
-           {
-              ServerConnection server = ServerConnection.getInstance();
-              server.closeConnection();
-           }
-        });
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat IRC CNAM");
         Font fontText = new Font("Arial", Font.PLAIN, 14);
