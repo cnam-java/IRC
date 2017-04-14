@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
@@ -41,6 +42,7 @@ import controller.ChangeChannelButtonListener;
 import controller.ConnectionButtonListener;
 import controller.DeconnexionButtonListener;
 import controller.SendButtonListener;
+import controller.ServerConnection;
 
 /**
  * 
@@ -135,6 +137,14 @@ public class Window extends javax.swing.JFrame {
         
         emoList.setVisibleRowCount(1);
         emoList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        Window window = Window.getInstance();
+        window.addWindowListener(new WindowAdapter(){
+            public void windowClosing()
+           {
+              ServerConnection server = ServerConnection.getInstance();
+              server.closeConnection();
+           }
+        });
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat IRC CNAM");
         Font fontText = new Font("Arial", Font.PLAIN, 14);
