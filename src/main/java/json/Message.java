@@ -25,7 +25,7 @@ public class Message {
 		args.put(nickname);
 		
 		JSONObject jsonConnect = new JSONObject();
-		jsonConnect.put("parameter", args);
+		jsonConnect.put("args", args);
 		jsonConnect.put("post", "#CONNECT");
 		jsonConnect.put("nickname", nickname);
 		
@@ -52,7 +52,7 @@ public class Message {
 		CustomLogger logger = new CustomLogger();
 		JSONObject jsonJoin = new JSONObject();
 		
-		jsonJoin.put("parameter", channel);
+		jsonJoin.put("args", channel);
 		jsonJoin.put("post", "#JOIN");
 		
 		String message = jsonJoin.toString();
