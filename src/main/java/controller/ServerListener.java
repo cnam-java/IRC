@@ -3,6 +3,8 @@ package controller;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import org.json.JSONObject;
+
 import io.Window;
 
 public class ServerListener extends Thread {
@@ -13,14 +15,16 @@ public class ServerListener extends Thread {
 			ServerConnection server = ServerConnection.getInstance();
 			String response = server.read();
 			if(response != null){
-			Window window = Window.getInstance();
-			final StyledDocument doc = window.getChatTextArea().getStyledDocument();
-			try {
-				doc.insertString(doc.getLength(),response+"\n", null);
-			} catch (BadLocationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				JSONObject json = new JSONObject(response);
+
+				if(json.get("nickname").toString().toUpperCase().equals("SERVER")){
+					SendButtonListener objectjson = new SendButtonListener();
+					objectjson.writeArea(json.get("post").toString(), "");
+				}
+				else{
+					SendButtonListener objectjson = new SendButtonListener();
+					objectjson.writeArea(json.get("post").toString(), json.get("nickname").toString());
+				}
 			}
 		}
 		

@@ -40,17 +40,16 @@ public class SendButtonListener implements ActionListener, KeyListener  {
 		// TODO Auto-generated method stub
 		
 	}
-	public void writeArea(){
+	public void writeArea(String msg, String nickname){
     	Window window = Window.getInstance();
     	
 		final StyledDocument doc = window.getChatTextArea().getStyledDocument();
 	
-		String msg = window.getInputTextArea().getText();
-		
+				
 		// Split the string and check each word
 		String[] words = msg.split(" ");
 		try {
-			doc.insertString(doc.getLength(), window.getUsernameField() + " : ", null);
+			doc.insertString(doc.getLength(), nickname + " : ", null);
 		} catch (BadLocationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,7 +111,7 @@ public class SendButtonListener implements ActionListener, KeyListener  {
             	//server.read();
             	
             } catch (Exception ex) {
-            	writeArea();
+            	
             }
         	
             window.getInputTextArea().setText("");
