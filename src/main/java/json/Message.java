@@ -55,8 +55,10 @@ public class Message {
 		
 		CustomLogger logger = new CustomLogger();
 		JSONObject jsonJoin = new JSONObject();
+		JSONArray args = new JSONArray();
+		args.put(channel);
 		
-		jsonJoin.put("args", channel);
+		jsonJoin.put("args", args);
 		jsonJoin.put("post", "#JOIN");
 		jsonJoin.put("nickname", nickname);
 		
