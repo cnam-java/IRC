@@ -141,9 +141,6 @@ public class ServerConnection {
 			try{
 				
 				message = this.br.readLine();
-				if(message != null){	
-					logger.log(Level.INFO, "ServerConnection", "read", "New message read : "+message);
-				}
 
 			} catch (IOException e) {
 				this.closeConnection();

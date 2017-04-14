@@ -21,7 +21,7 @@ public class ConnectionButtonListener implements ActionListener, KeyListener{
 	    ArrayList<String> userList = new ArrayList();
 	    Boolean isConnected = false;
 	    private static final Pattern PATTERN = Pattern.compile(
-	            "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
+	            "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
 
 
     public void actionPerformed(ActionEvent evt) {
