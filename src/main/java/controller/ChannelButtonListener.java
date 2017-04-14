@@ -62,7 +62,7 @@ public class ChannelButtonListener implements ActionListener, KeyListener{
 				String channel = channelwindow.getChannel();
 				ServerConnection server = ServerConnection.getInstance();
 		  		Message mess = new Message();
-				server.write(mess.joinMessage(channelwindow.getChannel()));
+				server.write(mess.joinMessage(channel, user));
 				Window window = Window.getInstance();
 				channelwindow.dispose();
 				window.setVisible(true);

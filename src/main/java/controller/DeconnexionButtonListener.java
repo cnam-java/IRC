@@ -18,7 +18,6 @@ public class DeconnexionButtonListener implements ActionListener  {
     public void actionPerformed(ActionEvent evt) {                                                 
         
         sendDisconnect();
-        Disconnect();
         Window window = Window.getInstance();
     	window.dispose();
     	ConnexionWindow connexionwindow = ConnexionWindow.getInstance();
@@ -41,6 +40,7 @@ public class DeconnexionButtonListener implements ActionListener  {
 
             ServerConnection server = ServerConnection.getInstance();
             server.write(disconnectMess); 
+            server.closeConnection(); 
 
             logger.log(Level.INFO, "DeconnexionButtonListener", "actionPerformed", nickname.toUpperCase()+" disconnected from server.");
             
@@ -50,17 +50,7 @@ public class DeconnexionButtonListener implements ActionListener  {
  
        }
 
-     public void Disconnect() {
+   
 
-         try {
-                //chatTextArea.append("Déconnecter.\n");
-                ServerConnection server = ServerConnection.getInstance();
-                server.closeConnection(); 
-                
-         } catch(Exception ex) {
-                chatTextArea.append("Echec de la déconnexion. \n");
-         }
-
-       }
 
 }

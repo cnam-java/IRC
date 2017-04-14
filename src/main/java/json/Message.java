@@ -38,6 +38,10 @@ public class Message {
 		
 		CustomLogger logger = new CustomLogger();
 		JSONObject jsonText = new JSONObject();
+		JSONArray args = new JSONArray();
+		
+
+		jsonText.put("args", args);
 		
 		jsonText.put("post", userMessage);
 		jsonText.put("nickname", nickname);
@@ -47,13 +51,14 @@ public class Message {
 		return message;
 	}
 	
-	public String joinMessage(String channel) {
+	public String joinMessage(String channel, String nickname) {
 		
 		CustomLogger logger = new CustomLogger();
 		JSONObject jsonJoin = new JSONObject();
 		
 		jsonJoin.put("args", channel);
 		jsonJoin.put("post", "#JOIN");
+		jsonJoin.put("nickname", nickname);
 		
 		String message = jsonJoin.toString();
 		logger.log(Level.INFO, "Message", "joinMessage", "New join message created :"+message);
@@ -65,6 +70,10 @@ public class Message {
 		CustomLogger logger = new CustomLogger();
 		JSONObject jsonQuit = new JSONObject();
 		
+		JSONArray args = new JSONArray();
+		
+
+		jsonQuit.put("args", args);
 		jsonQuit.put("nickname", nickname); 
 		jsonQuit.put("post", "#QUIT");
 		
@@ -78,6 +87,10 @@ public class Message {
 		CustomLogger logger = new CustomLogger();
 		JSONObject jsonExit = new JSONObject();
 		
+		JSONArray args = new JSONArray();
+		
+
+		jsonExit.put("args", args);
 		jsonExit.put("nickname", nickname);
 		jsonExit.put("post", "#EXIT");
 		
